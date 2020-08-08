@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/peaches_background"
+    tools:context="Fragments.AddCategoryFragment">
+
+    <EditText
+        android:id="@+id/add_category_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/custom_input_category_edittext"
+        android:fontFamily="@font/caudex_italic"
+        android:hint="@string/enter_new_category"
+        android:importantForAutofill="no"
+        android:inputType="textCapSentences"
+        android:padding="10dp"
+        android:textColorHint="#3F51B5"
+        android:textSize="27sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/back_to_all_categories_imageButton"
+        android:layout_width="70dp"
+        android:layout_height="55dp"
+        android:backgroundTintMode="screen"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+        android:contentDescription="TODO" />
+
+    <Button
+        android:id="@+id/add_new_category_button"
+        android:layout_width="281dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/custom_add_category_button"
+        android:text="@string/add_new_category"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_category_editText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

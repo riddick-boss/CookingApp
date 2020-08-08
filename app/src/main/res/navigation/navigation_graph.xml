@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/dishCategoryFragment">
+    <fragment
+        android:id="@+id/dishCategoryFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.DishCategoryFragment"
+        android:label="DishCategoryFragment"
+        tools:layout="@layout/dish_category_fragment_layout">
+        <action
+            android:id="@+id/action_dishCategoryFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment" />
+        <action
+            android:id="@+id/action_dishCategoryFragment_to_dishesListFragment"
+            app:destination="@id/dishesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.AddCategoryFragment"
+        android:label="AddCategoryFragment"
+        tools:layout="@layout/new_category_add_fragment_layout">
+        <action
+            android:id="@+id/action_addCategoryFragment_to_dishCategoryFragment"
+            app:destination="@id/dishCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dishesListFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.DishesListFragment"
+        android:label="DishesListFragment"
+        tools:layout="@layout/dishes_list__fragment_layout">
+        <action
+            android:id="@+id/action_dishesListFragment_to_dishCategoryFragment"
+            app:destination="@id/dishCategoryFragment" />
+        <action
+            android:id="@+id/action_dishesListFragment_to_addTestFragment"
+            app:destination="@id/addTestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTestFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.AddTestFragment"
+        android:label="AddTestFragment" />
+</navigation>
