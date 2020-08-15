@@ -17,6 +17,7 @@ import abandonedstudio.app.cookingapp.R;
 public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishListHolder> {
 
     private List<Dish> dishes = new ArrayList<>();
+    private OnDishClickListener listener;
 
     @NonNull
     @Override
@@ -42,7 +43,7 @@ public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishLi
         notifyDataSetChanged();
     }
 
-    static class DishListHolder extends RecyclerView.ViewHolder{
+    class DishListHolder extends RecyclerView.ViewHolder{
 
         private TextView dishNameTextView;
         private TextView preparationTimeTextView;
@@ -50,7 +51,24 @@ public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishLi
         public DishListHolder(@NonNull View itemView) {
             super(itemView);
             dishNameTextView = itemView.findViewById(R.id.dish_name_textView);
-            preparationTimeTextView = itemView.findViewById(R.id.preparation_time_texView);
+            preparationTimeTextView = itemView.findViewById(R.id.preparation_time_list_textView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION){
+                        listener.onDishClicked(dishes.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnDishClickListener{
+        void onDishClicked(Dish dish);
+    }
+    public void setOnDishClickListener(OnDishClickListener listener){
+        this.listener = listener;
     }
 }

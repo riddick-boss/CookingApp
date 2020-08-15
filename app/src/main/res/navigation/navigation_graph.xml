@@ -34,11 +34,12 @@
             android:id="@+id/action_dishesListFragment_to_dishCategoryFragment"
             app:destination="@id/dishCategoryFragment" />
         <action
-            android:id="@+id/action_dishesListFragment_to_addTestFragment"
-            app:destination="@id/addTestFragment" />
+            android:id="@+id/action_dishesListFragment_to_dishFragment"
+            app:destination="@id/dishFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addTestFragment"
-        android:name="abandonedstudio.app.cookingapp.Fragments.AddTestFragment"
-        android:label="AddTestFragment" />
+        android:id="@+id/dishFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.DishFragment"
+        android:label="DishFragment"
+        tools:layout="@layout/dish_fragment_layout"/>
 </navigation>

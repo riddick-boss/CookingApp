@@ -133,6 +133,7 @@ public class DishCategoryFragment extends Fragment {
             public void onItemClick(DishCategory bDishCategory) {
                 sharedViewModel.setCategoryId(bDishCategory.getCategoryId());
                 sharedViewModel.setCategoryName(bDishCategory.getCategory());
+                sharedViewModel.setDishCategory(bDishCategory);
                 NavHostFragment.findNavController(DishCategoryFragment.this)
                         .navigate(R.id.action_dishCategoryFragment_to_dishesListFragment);
             }

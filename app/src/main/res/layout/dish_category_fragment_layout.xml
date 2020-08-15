@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="@string/przepisnik"
+        android:text="@string/CookingApp"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="50sp"

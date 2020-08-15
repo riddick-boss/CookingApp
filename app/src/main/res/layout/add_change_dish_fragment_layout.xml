@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
-        android:id="@+id/back_to_dish_list_imageButton"
+        android:id="@+id/back_to_dish_list_form_change_dish_imageButton"
         android:layout_width="70dp"
         android:layout_height="55dp"
         android:backgroundTintMode="screen"
@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/preparation_time_picker"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_marginTop="5dp"
@@ -26,17 +26,17 @@
         app:srcCompat="@drawable/ic_baseline_clock_24" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/preparation_time_add_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="@string/choose_preparation_time"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/preparation_time_picker"
+        app:layout_constraintStart_toStartOf="@+id/preparation_time_picker"
+        app:layout_constraintTop_toBottomOf="@+id/preparation_time_picker" />
 
     <EditText
-        android:id="@+id/textView2"
+        android:id="@+id/enter_dish_name_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -45,31 +45,31 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/preparation_time_add_textView"
         android:importantForAutofill="no" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/dish_photo_picker"
         android:layout_width="328dp"
         android:layout_height="66dp"
         android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/enter_dish_name_textView"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/choose_photo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/choose_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/dish_photo_picker" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/ready_dish_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ready"
@@ -77,35 +77,35 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/ingredients_add_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:text="@string/ingredients"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/choose_photo_button" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="413dp"
-        android:layout_height="104dp"
+        android:id="@+id/ingredients_add_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/ingredients_add_textView" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/preparation_steps_add_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/preparing"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="@+id/ingredients_add_textView"
+        app:layout_constraintTop_toBottomOf="@+id/add_ingredient_editText" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/add_ingredient_editText"
         android:layout_width="149dp"
         android:layout_height="34dp"
         android:layout_marginTop="5dp"
@@ -113,20 +113,20 @@
         android:hint="@string/enter_new_ingredient"
         android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintStart_toStartOf="@+id/ingredients_add_textView"
+        app:layout_constraintTop_toBottomOf="@+id/ingredients_add_recyclerView" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/preparation_steps_add_recyclerView"
         android:layout_width="0dp"
-        android:layout_height="122dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/preparation_steps_add_textView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/add_preparation_step_editText"
         android:layout_width="142dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
@@ -134,7 +134,7 @@
         android:hint="@string/enter_next_step"
         android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+        app:layout_constraintStart_toStartOf="@+id/preparation_steps_add_textView"
+        app:layout_constraintTop_toBottomOf="@+id/preparation_steps_add_recyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

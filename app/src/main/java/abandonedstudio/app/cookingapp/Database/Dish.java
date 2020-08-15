@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "dishes", foreignKeys = @ForeignKey(entity = DishCategory.class, parentColumns = "categoryId", childColumns = "category_id", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE))
 public class Dish {
+
     public Dish(String dishName, int preparationTime, int dishCategoryID) {
         this.dishName = dishName;
         this.preparationTime = preparationTime;
@@ -14,7 +15,7 @@ public class Dish {
     }
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int dishId;
 
     @ColumnInfo(name = "dish_name")
     private String dishName;
@@ -28,12 +29,12 @@ public class Dish {
     //need to add Uri to photo
 
 
-    public int getId() {
-        return id;
+    public int getDishId() {
+        return dishId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDishId(int dishId) {
+        this.dishId = dishId;
     }
 
     public String getDishName() {

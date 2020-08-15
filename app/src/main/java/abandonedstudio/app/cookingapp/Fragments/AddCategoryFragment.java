@@ -18,12 +18,13 @@ import androidx.navigation.fragment.NavHostFragment;
 import abandonedstudio.app.cookingapp.CloseKeyboard;
 import abandonedstudio.app.cookingapp.Database.DishCategory;
 import abandonedstudio.app.cookingapp.R;
+import abandonedstudio.app.cookingapp.ViewModel.AddCategoryViewModel;
 import abandonedstudio.app.cookingapp.ViewModel.DishCategoryViewModel;
 
 public class AddCategoryFragment extends Fragment implements View.OnClickListener {
 
     private EditText newCategoryEditText;
-    private DishCategoryViewModel dishCategoryViewModel;
+    private AddCategoryViewModel addCategoryViewModel;
     private CloseKeyboard closeKeyboard;
 
     @Nullable
@@ -42,7 +43,7 @@ public class AddCategoryFragment extends Fragment implements View.OnClickListene
 
         closeKeyboard = new CloseKeyboard();
 
-        dishCategoryViewModel = new ViewModelProvider(requireActivity()).get(DishCategoryViewModel.class);
+        addCategoryViewModel = new ViewModelProvider(requireActivity()).get(AddCategoryViewModel.class);
 
         backButton.setOnClickListener(this);
         addCategoryButton.setOnClickListener(this);
@@ -62,7 +63,7 @@ public class AddCategoryFragment extends Fragment implements View.OnClickListene
                 String newCategory = newCategoryEditText.getText().toString().trim();
                 if(!newCategory.isEmpty()) {
                     DishCategory newDishCategory = new DishCategory(newCategory);
-                    dishCategoryViewModel.insert(newDishCategory);
+                    addCategoryViewModel.insert(newDishCategory);
                     closeKeyboard.closeKeyboard(requireActivity());
                     newCategoryEditText.setText(null);
                     newCategoryEditText.clearFocus();

@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import abandonedstudio.app.cookingapp.Database.Database;
 import abandonedstudio.app.cookingapp.Database.DishCategory;
 import abandonedstudio.app.cookingapp.Database.DishCategoryDao;
-import abandonedstudio.app.cookingapp.Database.DishCategoryDatabase;
 
 public class DishCategoryRepository {
 
@@ -17,8 +17,8 @@ public class DishCategoryRepository {
     private LiveData<List<DishCategory>> allDishCategories;
 
     public DishCategoryRepository(Application application){
-        DishCategoryDatabase dishCategoryDatabase = DishCategoryDatabase.getInstance(application);
-        dishCategoryDao = dishCategoryDatabase.dishCategoryDao();
+        Database database = Database.getInstance(application);
+        dishCategoryDao = database.dishCategoryDao();
         allDishCategories = dishCategoryDao.getAllCategories();
     }
 

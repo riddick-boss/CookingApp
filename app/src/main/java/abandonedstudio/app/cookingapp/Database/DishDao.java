@@ -21,7 +21,10 @@ public interface DishDao {
     @Delete
     void delete(Dish dish);
 
-    @Query("SELECT * FROM dishes WHERE category_id LIKE :categoryId ORDER BY dish_name")
+    @Query("SELECT * FROM dishes WHERE category_id LIKE :categoryId ORDER BY dish_name COLLATE NOCASE")
     LiveData<List<Dish>> getAllDishesFromCategory(int categoryId);
+
+    @Query("SELECT * FROM dishes ORDER BY dish_name COLLATE NOCASE")
+    LiveData<List<Dish>> getAllDishes();
 
 }

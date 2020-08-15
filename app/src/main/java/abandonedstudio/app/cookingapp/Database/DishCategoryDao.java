@@ -21,6 +21,6 @@ public interface DishCategoryDao {
     @Delete
     void delete(DishCategory dishCategory);
 
-    @Query("SELECT * FROM dish_category ORDER BY category")
+    @Query("SELECT * FROM dish_category ORDER BY category COLLATE NOCASE")
     LiveData<List<DishCategory>> getAllCategories();
 }

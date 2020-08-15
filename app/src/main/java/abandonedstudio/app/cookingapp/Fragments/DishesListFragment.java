@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,7 +23,7 @@ import java.util.List;
 import abandonedstudio.app.cookingapp.Adapters.DishListAdapter;
 import abandonedstudio.app.cookingapp.Database.Dish;
 import abandonedstudio.app.cookingapp.R;
-import abandonedstudio.app.cookingapp.ViewModel.DishViewModel;
+import abandonedstudio.app.cookingapp.ViewModel.DishListViewModel;
 import abandonedstudio.app.cookingapp.ViewModel.SharedViewModel;
 
 public class DishesListFragment extends Fragment {
@@ -35,20 +34,21 @@ public class DishesListFragment extends Fragment {
     private RecyclerView recyclerView;
     private DishListAdapter adapter;
     private SharedViewModel sharedViewModel;
-    private DishViewModel dishViewModel;
+    private DishListViewModel dishListViewModel;
     private int currentCategoryId;
     private String currentCategoryName;
 
+    /*
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            /* getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
                 @Override
                 public void onFragmentResult(@NonNull String key, @NonNull Bundle bundle) {
                     setCategoryPassed(bundle.getString("bundleKey"));
                 }
-            }); */
-        }
+            });
+        } */
 
     @Nullable
     @Override
@@ -67,20 +67,20 @@ public class DishesListFragment extends Fragment {
         adapter = new DishListAdapter();
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        dishViewModel = new ViewModelProvider(requireActivity()).get(DishViewModel.class);
+        dishListViewModel = new ViewModelProvider(requireActivity()).get(DishListViewModel.class);
 
-        currentCategoryId = sharedViewModel.getCategoryId();
+        currentCategoryId = sharedViewModel.getDishCategory().getCategoryId();
         currentCategoryName = sharedViewModel.getCategoryName();
 
-        categoryTextView.setText(String.valueOf(currentCategoryId));
+        categoryTextView.setText(String.valueOf(currentCategoryName));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        dishViewModel.getAllDishesFromCategory(currentCategoryId).observe(getViewLifecycleOwner(), new Observer<List<Dish>>() {
+        dishListViewModel.getAllDishesFromCategory(currentCategoryId).observe(getViewLifecycleOwner(), new Observer<List<Dish>>() {
             @Override
-            public void onChanged(List<Dish> dishes) {
+            public void onChanged(@Nullable List<Dish> dishes) {
                 adapter.setDishes(dishes);
             }
         });
@@ -92,8 +92,15 @@ public class DishesListFragment extends Fragment {
                         .navigate(R.id.action_dishesListFragment_to_dishCategoryFragment);
             }
         });
+
+        adapter.setOnDishClickListener(new DishListAdapter.OnDishClickListener() {
+            @Override
+            public void onDishClicked(Dish dish) {
+                sharedViewModel.setDishId(dish.getDishId());
+                sharedViewModel.setDishName(dish.getDishName());
+                NavHostFragment.findNavController(DishesListFragment.this)
+                        .navigate(R.id.action_dishesListFragment_to_dishFragment);
+            }
+        });
     }
 }
-
-// @Query("select * from task where state = :states and sentdate between :fromdate and :todate")
-//  List<Task> getFilterAll(String states, String fromdate, String todate);

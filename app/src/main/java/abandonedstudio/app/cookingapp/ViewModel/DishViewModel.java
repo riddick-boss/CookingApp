@@ -8,32 +8,27 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import abandonedstudio.app.cookingapp.Database.Dish;
-import abandonedstudio.app.cookingapp.Repository.DishRepository;
+import abandonedstudio.app.cookingapp.Database.Ingredient;
+import abandonedstudio.app.cookingapp.Database.PreparationStep;
+import abandonedstudio.app.cookingapp.Repository.IngredientRepository;
+import abandonedstudio.app.cookingapp.Repository.PreparationStepRepository;
 
 public class DishViewModel extends AndroidViewModel {
 
-    private DishRepository dishRepository;
+    private PreparationStepRepository preparationStepRepository;
+    private IngredientRepository ingredientRepository;
 
     public DishViewModel(@NonNull Application application) {
         super(application);
-        dishRepository = new DishRepository(application);
+        preparationStepRepository = new PreparationStepRepository(application);
+        ingredientRepository = new IngredientRepository(application);
+    }
+    
+    public LiveData<List<PreparationStep>> getAllPreparationStepsFromDish(int dishId){
+        return preparationStepRepository.getAllPreparationStepsFromDish(dishId);
     }
 
-    public void insert(Dish dish){
-        dishRepository.insert(dish);
+    public LiveData<List<Ingredient>> getAllIngredientsFromDish(int dishId){
+        return ingredientRepository.getAllIngredientsFromDish(dishId);
     }
-
-    public void update(Dish dish){
-        dishRepository.update(dish);
-    }
-
-    public void delete(Dish dish){
-        dishRepository.delete(dish);
-    }
-
-    public LiveData<List<Dish>> getAllDishesFromCategory(int categoryId){
-        return dishRepository.getAllDishesFromCategory(categoryId);
-    }
-
 }

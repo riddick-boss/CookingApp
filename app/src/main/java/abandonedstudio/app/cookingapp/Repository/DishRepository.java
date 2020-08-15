@@ -7,17 +7,17 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import abandonedstudio.app.cookingapp.Database.Database;
 import abandonedstudio.app.cookingapp.Database.Dish;
 import abandonedstudio.app.cookingapp.Database.DishDao;
-import abandonedstudio.app.cookingapp.Database.DishDatabase;
 
 public class DishRepository {
 
     private DishDao dishDao;
 
     public DishRepository(Application application){
-        DishDatabase dishDatabase = DishDatabase.getInstance(application);
-        dishDao = dishDatabase.dishDao();
+        Database database = Database.getInstance(application);
+        dishDao = database.dishDao();
     }
 
     public void insert(Dish dish){
@@ -34,6 +34,10 @@ public class DishRepository {
 
     public LiveData<List<Dish>> getAllDishesFromCategory(int categoryId){
         return dishDao.getAllDishesFromCategory(categoryId);
+    }
+
+    public LiveData<List<Dish>> getAllDishes(){
+        return dishDao.getAllDishes();
     }
 
     private static class InsertDishAsyncTask extends AsyncTask<Dish, Void, Void>{
