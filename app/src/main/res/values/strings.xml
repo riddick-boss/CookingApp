@@ -28,4 +28,10 @@
     <string name="enter_new_ingredient">Enter new ingredient</string>
     <string name="enter_next_step">Enter next step</string>
     <string name="create_shopping_list">create shopping list</string>
+    <string name="ingredient">ingredient</string>
+    <string name="step_number">1</string>
+    <string name="step_description">step description</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="choose_all_ingredients">choose all</string>
+    <string name="cook">Cook</string>
 </resources>

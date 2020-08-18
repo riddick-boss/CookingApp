@@ -1,8 +1,10 @@
 package abandonedstudio.app.cookingapp.Adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,7 @@ public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishLi
         Dish currentDish = dishes.get(position);
         holder.dishNameTextView.setText(currentDish.getDishName());
         holder.preparationTimeTextView.setText(String.valueOf(currentDish.getPreparationTime()));
+        holder.dishPhotoImageView.setImageURI(Uri.parse(currentDish.getPhotoUriString()));
     }
 
     @Override
@@ -45,13 +48,14 @@ public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishLi
 
     class DishListHolder extends RecyclerView.ViewHolder{
 
-        private TextView dishNameTextView;
-        private TextView preparationTimeTextView;
+        private TextView dishNameTextView, preparationTimeTextView;
+        private ImageView dishPhotoImageView;
 
         public DishListHolder(@NonNull View itemView) {
             super(itemView);
             dishNameTextView = itemView.findViewById(R.id.dish_name_textView);
             preparationTimeTextView = itemView.findViewById(R.id.preparation_time_list_textView);
+            dishPhotoImageView = itemView.findViewById(R.id.item_dish_photo_imageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
-        android:id="@+id/back_to_dish_list_form_change_dish_imageButton"
+        android:id="@+id/back_to_dish_list_from_change_dish_imageButton"
         android:layout_width="70dp"
         android:layout_height="55dp"
         android:backgroundTintMode="screen"

@@ -41,5 +41,36 @@
         android:id="@+id/dishFragment"
         android:name="abandonedstudio.app.cookingapp.Fragments.DishFragment"
         android:label="DishFragment"
-        tools:layout="@layout/dish_fragment_layout"/>
+        tools:layout="@layout/dish_fragment_layout">
+        <action
+            android:id="@+id/action_dishFragment_to_dishesListFragment"
+            app:destination="@id/dishesListFragment" />
+        <action
+            android:id="@+id/action_dishFragment_to_createShoppingListFragment"
+            app:destination="@id/createShoppingListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createShoppingListFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.CreateShoppingListFragment"
+        android:label="CreateShoppingListFragment"
+        tools:layout="@layout/choose_shopping_list_fragment_layout">
+        <action
+            android:id="@+id/action_createShoppingListFragment_to_shoppingListFragment"
+            app:destination="@id/shoppingListFragment" />
+        <action
+            android:id="@+id/action_createShoppingListFragment_to_dishFragment"
+            app:destination="@id/dishFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoppingListFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.ShoppingListFragment"
+        android:label="ShoppingListFragment"
+        tools:layout="@layout/ready_shopping_list_fragment_layout">
+        <action
+            android:id="@+id/action_shoppingListFragment_to_createShoppingListFragment"
+            app:destination="@id/createShoppingListFragment" />
+        <action
+            android:id="@+id/action_shoppingListFragment_to_dishFragment"
+            app:destination="@id/dishFragment" />
+    </fragment>
 </navigation>
