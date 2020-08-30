@@ -49,7 +49,7 @@ public class ShoppingListFragment extends Fragment {
 
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-        dishNameTextView.setText(sharedViewModel.getDishName());
+        dishNameTextView.setText(sharedViewModel.getDish().getDishName());
 
         adapter.setIngredientsToBuy(sharedViewModel.getIngredientsToBuy());
 

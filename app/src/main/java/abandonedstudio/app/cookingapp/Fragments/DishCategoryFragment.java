@@ -90,7 +90,6 @@ public class DishCategoryFragment extends Fragment {
             public void onItemLongClick(final DishCategory aDishCategory) {
                 nestedLayout.setVisibility(View.VISIBLE);
                 categoryNameEditText.setText(aDishCategory.getCategory());
-                // DishCategory helpDishCategory = new DishCategory(aDishCategory.getCategory());
                 final int currentId = aDishCategory.getCategoryId();
 
                 changeCategoryNameButton.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +130,6 @@ public class DishCategoryFragment extends Fragment {
 
             @Override
             public void onItemClick(DishCategory bDishCategory) {
-                sharedViewModel.setCategoryId(bDishCategory.getCategoryId());
-                sharedViewModel.setCategoryName(bDishCategory.getCategory());
                 sharedViewModel.setDishCategory(bDishCategory);
                 NavHostFragment.findNavController(DishCategoryFragment.this)
                         .navigate(R.id.action_dishCategoryFragment_to_dishesListFragment);
@@ -146,18 +143,4 @@ public class DishCategoryFragment extends Fragment {
             }
         });
     }
-
-
-    /*
-    private void openNewCategoryPicker(){
-        //NewCategoryDialog newCategoryDialog = new NewCategoryDialog();
-        // newCategoryDialog.show(getFragmentManager(), "new category dialog");
-    }
-
-    @Override
-    public void passCategory(String category){
-        DishCategory newDishCategory = new DishCategory(category);
-        dishCategoryViewModel.insert(newDishCategory);
-        Toast.makeText(getContext(), "Category added", Toast.LENGTH_SHORT).show();
-    } */
 }

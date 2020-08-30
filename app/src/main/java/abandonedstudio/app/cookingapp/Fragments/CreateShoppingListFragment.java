@@ -56,13 +56,13 @@ public class CreateShoppingListFragment extends Fragment {
 
         adapter = new CreateShoppingListAdapter();
 
-        dishNameTextView.setText(sharedViewModel.getDishName());
+        dishNameTextView.setText(sharedViewModel.getDish().getDishName());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        createShoppingListViewModel.getAllIngredientsFromDish(sharedViewModel.getDishId()).observe(getViewLifecycleOwner(), new Observer<List<Ingredient>>() {
+        createShoppingListViewModel.getAllIngredientsFromDish(sharedViewModel.getDish().getDishId()).observe(getViewLifecycleOwner(), new Observer<List<Ingredient>>() {
             @Override
             public void onChanged(List<Ingredient> ingredients) {
                 adapter.setIngredients(ingredients);

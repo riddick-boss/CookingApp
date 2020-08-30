@@ -1,140 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/back_to_dish_list_from_change_dish_imageButton"
-        android:layout_width="70dp"
-        android:layout_height="55dp"
-        android:backgroundTintMode="screen"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
-
-    <ImageView
-        android:id="@+id/preparation_time_picker"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_clock_24" />
-
-    <TextView
-        android:id="@+id/preparation_time_add_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="@string/choose_preparation_time"
-        app:layout_constraintEnd_toEndOf="@+id/preparation_time_picker"
-        app:layout_constraintStart_toStartOf="@+id/preparation_time_picker"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_time_picker" />
-
-    <EditText
-        android:id="@+id/enter_dish_name_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:hint="@string/enter_dish_name"
-        android:inputType="text"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_time_add_textView"
-        android:importantForAutofill="no" />
-
-    <ImageView
-        android:id="@+id/dish_photo_picker"
-        android:layout_width="328dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_dish_name_textView"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-    <Button
-        android:id="@+id/choose_photo_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/choose_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dish_photo_picker" />
-
-    <Button
-        android:id="@+id/ready_dish_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ready"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/ingredients_add_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/ingredients"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_photo_button" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ingredients_add_recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients_add_textView" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/preparation_steps_add_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/preparing"
-        app:layout_constraintStart_toStartOf="@+id/ingredients_add_textView"
-        app:layout_constraintTop_toBottomOf="@+id/add_ingredient_editText" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/add_ingredient_editText"
-        android:layout_width="149dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="@string/enter_new_ingredient"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/ingredients_add_textView"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients_add_recyclerView" />
+            <ImageButton
+                android:id="@+id/back_to_dish_list_from_change_dish_imageButton"
+                android:layout_width="70dp"
+                android:layout_height="55dp"
+                android:backgroundTintMode="screen"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/preparation_steps_add_recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_steps_add_textView" />
+            <ImageView
+                android:id="@+id/preparation_time_picker_imageView"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_clock_24" />
 
-    <EditText
-        android:id="@+id/add_preparation_step_editText"
-        android:layout_width="142dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="@string/enter_next_step"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="@+id/preparation_steps_add_textView"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_steps_add_recyclerView" />
+            <TextView
+                android:id="@+id/preparation_time_add_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/choose_preparation_time"
+                app:layout_constraintEnd_toEndOf="@+id/preparation_time_picker_imageView"
+                app:layout_constraintStart_toStartOf="@+id/preparation_time_picker_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/preparation_time_picker_imageView" />
+
+            <EditText
+                android:id="@+id/enter_dish_name_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="@string/enter_dish_name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/preparation_time_add_textView" />
+
+            <ImageView
+                android:id="@+id/dish_photo_imageView"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_dish_name_editText"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <Button
+                android:id="@+id/choose_photo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/choose_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/delete_photo_button"
+                app:layout_constraintTop_toBottomOf="@+id/dish_photo_imageView" />
+
+            <Button
+                android:id="@+id/ready_dish_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/ready"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_preparation_step_button" />
+
+            <TextView
+                android:id="@+id/ingredients_add_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/ingredients"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/choose_photo_button" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredients_add_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredients_add_textView" />
+
+            <TextView
+                android:id="@+id/preparation_steps_add_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/preparing"
+                app:layout_constraintStart_toStartOf="@+id/ingredients_add_textView"
+                app:layout_constraintTop_toBottomOf="@+id/add_ingredient_editText" />
+
+            <EditText
+                android:id="@+id/add_ingredient_editText"
+                android:layout_width="149dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="@string/enter_new_ingredient"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="@+id/ingredients_add_textView"
+                app:layout_constraintTop_toBottomOf="@+id/ingredients_add_recyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/preparation_steps_add_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/preparation_steps_add_textView" />
+
+            <EditText
+                android:id="@+id/add_preparation_step_editText"
+                android:layout_width="142dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="@string/enter_next_step"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="@+id/preparation_steps_add_textView"
+                app:layout_constraintTop_toBottomOf="@+id/preparation_steps_add_recyclerView" />
+
+            <Button
+                android:id="@+id/add_ingredient_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/add"
+                app:layout_constraintBottom_toBottomOf="@+id/add_ingredient_editText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/add_ingredient_editText" />
+
+            <Button
+                android:id="@+id/add_preparation_step_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="@string/add"
+                app:layout_constraintBottom_toBottomOf="@+id/add_preparation_step_editText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/add_preparation_step_editText" />
+
+            <Button
+                android:id="@+id/delete_photo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/delete_photo"
+                app:layout_constraintBottom_toBottomOf="@+id/choose_photo_button"
+                app:layout_constraintEnd_toStartOf="@+id/choose_photo_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/choose_photo_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

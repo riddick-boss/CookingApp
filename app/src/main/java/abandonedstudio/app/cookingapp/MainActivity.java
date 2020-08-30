@@ -1,5 +1,6 @@
 package abandonedstudio.app.cookingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    } */
+
+    /*
         setContentView(R.layout.activity_main);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -58,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_layout);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,26 +74,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item_dish_ingredients) {
-        // Handle action bar item_dish_ingredients clicks here. The action bar will
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item_dish_ingredients.getItemId();
-
+        int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
-        return super.onOptionsItemSelected(item_dish_ingredients);
+        return super.onOptionsItemSelected(item);
     } */
 }

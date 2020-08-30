@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import abandonedstudio.app.cookingapp.Database.Dish;
+import abandonedstudio.app.cookingapp.GlideModule.GlideApp;
 import abandonedstudio.app.cookingapp.R;
 
 public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishListHolder> {
@@ -33,7 +34,12 @@ public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishLi
         Dish currentDish = dishes.get(position);
         holder.dishNameTextView.setText(currentDish.getDishName());
         holder.preparationTimeTextView.setText(String.valueOf(currentDish.getPreparationTime()));
-        holder.dishPhotoImageView.setImageURI(Uri.parse(currentDish.getPhotoUriString()));
+        //set image in list properly
+        GlideApp.with(holder.itemView.getContext())
+                .load(Uri.parse(currentDish.getPhotoUriString()))
+                .override(holder.dishPhotoImageView.getWidth(), holder.dishPhotoImageView.getHeight())
+                .fitCenter()
+                .into(holder.dishPhotoImageView);
     }
 
     @Override
@@ -66,11 +72,23 @@ public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishLi
                     }
                 }
             });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION){
+                        listener.onDishLongCLicked(dishes.get(position));
+                    }
+                    return true;
+                }
+            });
         }
     }
 
     public interface OnDishClickListener{
         void onDishClicked(Dish dish);
+        void onDishLongCLicked(Dish dish);
     }
     public void setOnDishClickListener(OnDishClickListener listener){
         this.listener = listener;

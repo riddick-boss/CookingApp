@@ -26,6 +26,7 @@ import abandonedstudio.app.cookingapp.Adapters.DishPreparationStepsAdapter;
 import abandonedstudio.app.cookingapp.Database.Dish;
 import abandonedstudio.app.cookingapp.Database.Ingredient;
 import abandonedstudio.app.cookingapp.Database.PreparationStep;
+import abandonedstudio.app.cookingapp.GlideModule.GlideApp;
 import abandonedstudio.app.cookingapp.R;
 import abandonedstudio.app.cookingapp.ViewModel.DishViewModel;
 import abandonedstudio.app.cookingapp.ViewModel.SharedViewModel;
@@ -74,7 +75,11 @@ public class DishFragment extends Fragment {
 
         dishNameTextView.setText(dish.getDishName());
         preparationTimeTextView.setText(String.valueOf(dish.getPreparationTime()));
-        dishPhotoImageView.setImageURI(Uri.parse(dish.getPhotoUriString()));
+        GlideApp.with(requireContext())
+                .load(Uri.parse(dish.getPhotoUriString()))
+                .override(dishPhotoImageView.getWidth(), dishPhotoImageView.getHeight())
+                .fitCenter()
+                .into(dishPhotoImageView);
 
         ingredientsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ingredientsRecyclerView.setHasFixedSize(false);

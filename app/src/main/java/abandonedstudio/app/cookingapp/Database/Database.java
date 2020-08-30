@@ -52,9 +52,9 @@ public abstract class Database extends RoomDatabase {
             dishCategoryDao.insert(new DishCategory("Breakfast"));
             dishCategoryDao.insert(new DishCategory("Dinner"));
             dishCategoryDao.insert(new DishCategory("Lunch"));
-            dishDao.insert(new Dish("Cereals", 6, 1, String.valueOf(Uri.parse("android.resource://abandonedstudio.app.cookingapp/drawable/cereals_photo/cereals_photo"))));
-            dishDao.insert(new Dish("Pizza", 67, 2, String.valueOf(Uri.parse("android.resource://abandonedstudio.app.cookingapp/drawable/pizza_photo/pizza_photo"))));
-            dishDao.insert(new Dish("lasagna", 53, 3, String.valueOf(Uri.parse("android.resource://abandonedstudio.app.cookingapp/drawable/lasagna_photo/lasagna_photo"))));
+            dishDao.insert(new Dish("Cereals", 6, 1, String.valueOf(Uri.parse("android.resource://abandonedstudio.app.cookingapp/drawable/cereals_photo"))));
+            dishDao.insert(new Dish("Pizza", 67, 2, String.valueOf(Uri.parse("android.resource://abandonedstudio.app.cookingapp/drawable/pizza_photo"))));
+            dishDao.insert(new Dish("lasagna", 53, 3, String.valueOf(Uri.parse("android.resource://abandonedstudio.app.cookingapp/drawable/lasagna_photo"))));
             preparationStepDao.insert(new PreparationStep(1, "warm up milk", 1));
             preparationStepDao.insert(new PreparationStep(2, "add cereals", 1));
             preparationStepDao.insert(new PreparationStep(1, "wash tomatoes", 2));

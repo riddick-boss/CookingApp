@@ -34,4 +34,11 @@
     <string name="shopping_list">Shopping List</string>
     <string name="choose_all_ingredients">choose all</string>
     <string name="cook">Cook</string>
+    <string name="delete_dish">Delete \n this dish</string>
+    <string name="edit_dish">Edit it</string>
+    <string name="choose_preparation_time_dialog_title">Choose time</string>
+    <string name="choose_preparation_time_dialog_message">in minutes:</string>
+    <string name="add">Add</string>
+    <string name="delete_photo">Delete photo</string>
+    <string name="enter_step">Enter step</string>
 </resources>

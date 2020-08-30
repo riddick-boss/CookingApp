@@ -3,9 +3,10 @@ package abandonedstudio.app.cookingapp.Database;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "dishes", foreignKeys = @ForeignKey(entity = DishCategory.class, parentColumns = "categoryId", childColumns = "category_id", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE))
+@Entity(tableName = "dishes", indices = {@Index("category_id")}, foreignKeys = @ForeignKey(entity = DishCategory.class, parentColumns = "categoryId", childColumns = "category_id", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE))
 public class Dish {
 
     public Dish(String dishName, int preparationTime, int dishCategoryID, String photoUriString) {

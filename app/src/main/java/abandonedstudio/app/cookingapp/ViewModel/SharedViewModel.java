@@ -10,8 +10,6 @@ import abandonedstudio.app.cookingapp.Database.DishCategory;
 
 public class SharedViewModel extends ViewModel {
 
-    private int categoryId, dishId;
-    private String categoryName, dishName;
     private DishCategory dishCategory;
     private Dish dish;
     private List<String> ingredientsToBuy = new ArrayList<>();
@@ -33,38 +31,6 @@ public class SharedViewModel extends ViewModel {
 
     public void setDish(Dish dish) {
         this.dish = dish;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public int getDishId() {
-        return dishId;
-    }
-
-    public void setDishId(int dishId) {
-        this.dishId = dishId;
-    }
-
-    public String getDishName() {
-        return dishName;
-    }
-
-    public void setDishName(String dishName) {
-        this.dishName = dishName;
     }
 
     public List<String> getIngredientsToBuy() {

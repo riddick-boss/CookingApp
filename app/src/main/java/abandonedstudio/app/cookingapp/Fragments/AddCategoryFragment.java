@@ -19,7 +19,6 @@ import abandonedstudio.app.cookingapp.CloseKeyboard;
 import abandonedstudio.app.cookingapp.Database.DishCategory;
 import abandonedstudio.app.cookingapp.R;
 import abandonedstudio.app.cookingapp.ViewModel.AddCategoryViewModel;
-import abandonedstudio.app.cookingapp.ViewModel.DishCategoryViewModel;
 
 public class AddCategoryFragment extends Fragment implements View.OnClickListener {
 
