@@ -20,6 +20,7 @@ public class CreateShoppingListAdapter extends RecyclerView.Adapter<CreateShoppi
 
     private List<Ingredient> ingredients = new ArrayList<>();
     private List<String> ingredientsToBuy = new ArrayList<>();
+    private boolean isCheckedAll = false;
 
     @NonNull
     @Override
@@ -44,11 +45,27 @@ public class CreateShoppingListAdapter extends RecyclerView.Adapter<CreateShoppi
                 }
             }
         });
+        if(isCheckedAll){
+            holder.checkBox.setChecked(true);
+        }
+        if (!isCheckedAll){
+            holder.checkBox.setChecked(false);
+        }
     }
 
     @Override
     public int getItemCount() {
         return ingredients.size();
+    }
+
+    public void selectAllIngredients(){
+        isCheckedAll = true;
+        notifyDataSetChanged();
+    }
+
+    public void unselectAllIngredients(){
+        isCheckedAll = false;
+        notifyDataSetChanged();
     }
 
     public void setIngredients(List<Ingredient> ingredients) {

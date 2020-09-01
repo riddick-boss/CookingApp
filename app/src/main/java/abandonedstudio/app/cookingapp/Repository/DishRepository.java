@@ -10,6 +10,7 @@ import java.util.List;
 import abandonedstudio.app.cookingapp.Database.Database;
 import abandonedstudio.app.cookingapp.Database.Dish;
 import abandonedstudio.app.cookingapp.Database.DishDao;
+import io.reactivex.rxjava3.core.Single;
 
 public class DishRepository {
 
@@ -22,6 +23,14 @@ public class DishRepository {
 
     public void insert(Dish dish){
         new InsertDishAsyncTask(dishDao).execute(dish);
+    }
+
+    public Single<Long> insertAndWait(final Dish dish){
+        return Single.fromCallable(() -> dishDao.insertAndWait(dish));
+    }
+
+    public void insertAndWaitA(Dish dish){
+        new InsertDishAsyncTaskWithLong(dishDao).execute(dish);
     }
 
     public void update(Dish dish){
@@ -40,9 +49,29 @@ public class DishRepository {
         return dishDao.getAllDishes();
     }
 
+    private static class InsertDishAsyncTaskWithLong extends AsyncTask<Dish, Void, Void>{
+
+        private DishDao dishDao;
+
+        public InsertDishAsyncTaskWithLong(DishDao dishDao) {
+            this.dishDao = dishDao;
+        }
+
+        @Override
+        protected Void doInBackground(Dish... dishes) {
+            dishDao.insertAndWait(dishes[0]);
+            return null;
+        }
+    }
+
     private static class InsertDishAsyncTask extends AsyncTask<Dish, Void, Void>{
 
         private DishDao dishDao;
+        private OnDishInsertedListener listener;
+
+        public void setOnDishInsertedListener(OnDishInsertedListener listener){
+            this.listener = listener;
+        }
 
         public InsertDishAsyncTask(DishDao dishDao) {
             this.dishDao = dishDao;
@@ -53,6 +82,15 @@ public class DishRepository {
             dishDao.insert(dishes[0]);
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            listener.onDishInserted();
+        }
+    }
+
+    public interface OnDishInsertedListener{
+        void onDishInserted();
     }
 
     private static class UpdateDishAsyncTask extends AsyncTask<Dish, Void, Void>{

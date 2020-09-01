@@ -130,6 +130,8 @@ public class DishesListFragment extends Fragment {
                     public void onClick(View v) {
                         sharedViewModel.setDish(dish);
                         //navigate to edit dish fragment
+                        NavHostFragment.findNavController(DishesListFragment.this)
+                                .navigate(R.id.action_dishesListFragment_to_editDishFragment);
                     }
                 });
 

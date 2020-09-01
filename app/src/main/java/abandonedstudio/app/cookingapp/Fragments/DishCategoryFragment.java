@@ -1,6 +1,7 @@
 package abandonedstudio.app.cookingapp.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,6 +132,7 @@ public class DishCategoryFragment extends Fragment {
             @Override
             public void onItemClick(DishCategory bDishCategory) {
                 sharedViewModel.setDishCategory(bDishCategory);
+                Log.d("catid", String.valueOf(bDishCategory.getCategoryId()));
                 NavHostFragment.findNavController(DishCategoryFragment.this)
                         .navigate(R.id.action_dishCategoryFragment_to_dishesListFragment);
             }

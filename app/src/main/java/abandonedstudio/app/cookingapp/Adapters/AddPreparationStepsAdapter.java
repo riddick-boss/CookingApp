@@ -1,5 +1,6 @@
 package abandonedstudio.app.cookingapp.Adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import abandonedstudio.app.cookingapp.R;
 
-public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparationStepsAdapter.AddStepHolder> {
+public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparationStepsAdapter.AddStepHolder> implements PreparationStepMoveCallback.ItemTouchHelperListener{
 
     private ArrayList<String> preparationSteps = new ArrayList<>();
 
@@ -34,11 +36,13 @@ public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparat
 
     @Override
     public int getItemCount() {
-        if(preparationSteps.size() == 0){
+        if(preparationSteps == null || preparationSteps.size() == 0){
             return 0;
         }
         return preparationSteps.size();
     }
+
+
 
     public ArrayList<String> getPreparationSteps() {
         return preparationSteps;
@@ -51,6 +55,33 @@ public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparat
 
     public void addPreparationStep(String preparationStep){
         preparationSteps.add(preparationStep);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void onRowMoved(int fromPosition, int toPosition) {
+        int i;
+        if (fromPosition < toPosition){
+            for (i = fromPosition; i<toPosition; i++){
+                Collections.swap(preparationSteps, i, i+1);
+            }
+        }
+        else {
+            for (i = fromPosition; i > toPosition; i--) {
+                Collections.swap(preparationSteps, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onRowSelected(AddStepHolder myViewHolder) {
+        myViewHolder.itemView.setBackgroundColor(Color.GRAY);
+    }
+
+    @Override
+    public void onRowClear(AddStepHolder myViewHolder) {
+        myViewHolder.itemView.setBackgroundColor(Color.WHITE);
         notifyDataSetChanged();
     }
 
@@ -87,7 +118,7 @@ public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparat
                         preparationSteps.set(getAdapterPosition(), newStep);
                         notifyDataSetChanged();
                     }
-                    nestedLayout.setVisibility(View.VISIBLE);
+                    nestedLayout.setVisibility(View.INVISIBLE);
                 }
             });
         }

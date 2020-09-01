@@ -15,6 +15,9 @@ public interface DishDao {
     @Insert
     void insert(Dish dish);
 
+    @Insert
+    long insertAndWait(Dish dish);
+
     @Update
     void update(Dish dish);
 

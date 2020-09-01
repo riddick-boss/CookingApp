@@ -35,7 +35,7 @@ public class AddDishIngredientsAdapter extends RecyclerView.Adapter<AddDishIngre
 
     @Override
     public int getItemCount() {
-        if(ingredients.size() == 0){
+        if(ingredients == null || ingredients.size() == 0){
             return 0;
         }
         return ingredients.size();

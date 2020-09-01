@@ -25,7 +25,7 @@ public class AddDishCreator {
         dishPhotoPicker = new DishPhotoPicker();
     }
 
-    public boolean createDish(ArrayList<String> ingredients, ArrayList<String> preparationSteps, Context context){
+    public boolean checkNecessaryDataEntered(ArrayList<String> ingredients, ArrayList<String> preparationSteps, Context context){
         if(dishName == null || dishName.isEmpty()){
             Toast.makeText(context, "Enter dish name!", Toast.LENGTH_SHORT).show();
             return false;
@@ -45,10 +45,10 @@ public class AddDishCreator {
         dishPhotoPicker.pickDishPhoto(fragment);
     }
 
-    public void OnChoosePhotoResult(Bitmap bitmap){
-        dishPhotoPicker.onResult(bitmap);
+    /*public void OnChoosePhotoResult(Bitmap bitmap, Context context){
+        dishPhotoPicker.onResult(bitmap, context);
         setUri(dishPhotoPicker.getUri());
-    }
+    } */
 
     public Uri getUri() {
         return uri;

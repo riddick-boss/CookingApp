@@ -53,11 +53,11 @@
         app:layout_constraintBottom_toTopOf="@+id/ok_shopping_list_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/choose_all_checkBox"
         tools:listitem="@layout/item_choose_shopping_list"/>
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/choose_all_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

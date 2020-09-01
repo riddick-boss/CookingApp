@@ -1,6 +1,7 @@
 package abandonedstudio.app.cookingapp.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class AddCategoryFragment extends Fragment implements View.OnClickListene
                     closeKeyboard.closeKeyboard(requireActivity());
                     newCategoryEditText.setText(null);
                     newCategoryEditText.clearFocus();
+                    //showing on screen center
                     Toast.makeText(getContext(), "Category added", Toast.LENGTH_SHORT).show();
                     NavHostFragment.findNavController(AddCategoryFragment.this)
                             .navigate(R.id.action_addCategoryFragment_to_dishCategoryFragment);

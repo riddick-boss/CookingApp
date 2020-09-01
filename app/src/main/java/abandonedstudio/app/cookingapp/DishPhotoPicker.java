@@ -49,32 +49,36 @@ public class DishPhotoPicker {
         fragment.startActivityForResult(chooserIntent, RequestCode.GALLERY_PICK_IMAGE_REQUEST_CODE);
     }
 
-    public void onResult(Bitmap bitmap){
+    /* public void onResult(Bitmap bitmap, Context context){
         try {
-            createFileAndFolder(bitmap);
+            createFileAndFolder(bitmap, context);
         }catch (Exception e){
             //to do
         }
-    }
+    } */
 
-    private void createFileAndFolder(Bitmap bitmap) {
-        File directory = new File(Environment.DIRECTORY_PICTURES + File.separator + "dish_images");
-        if(!directory.exists()){
-            directory.mkdirs();
+    /* private void createFileAndFolder(Bitmap bitmap, Context context) {
+        //File directory = new File(Environment.DIRECTORY_PICTURES + File.separator + "dish_images");
+        File directory = new File(context.getFilesDir(), "image_" + System.currentTimeMillis() + ".jpg");
+        /*if(!directory.exists()){
+            if(directory.mkdirs()) Log.d("Image_saving", directory.getAbsolutePath());
         }
+        Log.d("Image_saving", directory.getAbsolutePath());
         // Objects.requireNonNull(fragment.requireContext().getExternalFilesDir(null)).getAbsolutePath()
-        File path = new File(directory, "image_" + System.currentTimeMillis() + ".jpg");
-
-        try (FileOutputStream fos = new FileOutputStream(path)) {
+        //File path = new File(directory, "image_" + System.currentTimeMillis() + ".jpg");
+        //Log.d("Image_saving", path.getAbsolutePath());
+        try (FileOutputStream fos = new FileOutputStream(directory)) {
             //bitmap saved to internal storage here
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             //comment
-            setUri(Uri.parse(path.getAbsolutePath()));
-            Log.d("Image_saving", path.getAbsolutePath());
+            fos.flush();
+            setUri(Uri.parse(directory.getAbsolutePath()));
+            Log.d("Image_saving", directory.getAbsolutePath());
         } catch (Exception e) {
             Log.d("Image_saving", "Error");
         }
-    }
+    } /*
+
 
     // saving image
     /* private void writeStreamToFile(InputStream input, File file) {

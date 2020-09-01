@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ public class CreateShoppingListFragment extends Fragment {
     private CreateShoppingListAdapter adapter;
     private Button okButton;
     private ImageButton goToDishButton;
+    private CheckBox checkAllCheckBox;
 
     @Nullable
     @Override
@@ -50,6 +53,7 @@ public class CreateShoppingListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.choose_shopping_list_recyclerView);
         okButton = view.findViewById(R.id.ok_shopping_list_button);
         goToDishButton = view.findViewById(R.id.back_to_dish_imageButton);
+        checkAllCheckBox = view.findViewById(R.id.choose_all_checkBox);
 
         createShoppingListViewModel = new ViewModelProvider(requireActivity()).get(CreateShoppingListViewModel.class);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
@@ -62,34 +66,26 @@ public class CreateShoppingListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        createShoppingListViewModel.getAllIngredientsFromDish(sharedViewModel.getDish().getDishId()).observe(getViewLifecycleOwner(), new Observer<List<Ingredient>>() {
-            @Override
-            public void onChanged(List<Ingredient> ingredients) {
-                adapter.setIngredients(ingredients);
-            }
-        });
+        createShoppingListViewModel.getAllIngredientsFromDish(sharedViewModel.getDish().getDishId()).observe(getViewLifecycleOwner(), ingredients -> adapter.setIngredients(ingredients));
 
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!adapter.getIngredientsToBuy().isEmpty()){
-                    sharedViewModel.setIngredientsToBuy(adapter.getIngredientsToBuy());
-                    //start notification service
-                    NavHostFragment.findNavController(CreateShoppingListFragment.this)
-                            .navigate(R.id.action_createShoppingListFragment_to_shoppingListFragment);
-                }
-                else {
-                    Toast.makeText(getContext(), "Shopping list is empty!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        goToDishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        okButton.setOnClickListener(v -> {
+            if(!adapter.getIngredientsToBuy().isEmpty()){
+                sharedViewModel.setIngredientsToBuy(adapter.getIngredientsToBuy());
+                //start notification service
                 NavHostFragment.findNavController(CreateShoppingListFragment.this)
-                        .navigate(R.id.action_createShoppingListFragment_to_dishFragment);
+                        .navigate(R.id.action_createShoppingListFragment_to_shoppingListFragment);
             }
+            else {
+                Toast.makeText(getContext(), "Shopping list is empty!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        goToDishButton.setOnClickListener(v -> NavHostFragment.findNavController(CreateShoppingListFragment.this)
+                .navigate(R.id.action_createShoppingListFragment_to_dishFragment));
+
+        checkAllCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) adapter.selectAllIngredients();
+            else adapter.unselectAllIngredients();
         });
     }
 }

@@ -41,4 +41,5 @@
     <string name="add">Add</string>
     <string name="delete_photo">Delete photo</string>
     <string name="enter_step">Enter step</string>
+    <string name="shopping_list_notification_service_description">This provides notification with your\'s shopping list</string>
 </resources>

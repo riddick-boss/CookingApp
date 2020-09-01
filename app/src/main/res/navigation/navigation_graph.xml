@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_dishesListFragment_to_addDishFragment"
             app:destination="@id/addDishFragment" />
+        <action
+            android:id="@+id/action_dishesListFragment_to_editDishFragment"
+            app:destination="@id/editDishFragment" />
     </fragment>
     <fragment
         android:id="@+id/dishFragment"
@@ -83,6 +86,15 @@
         tools:layout="@layout/add_change_dish_fragment_layout">
         <action
             android:id="@+id/action_addDishFragment_to_dishesListFragment"
+            app:destination="@id/dishesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editDishFragment"
+        android:name="abandonedstudio.app.cookingapp.Fragments.EditDishFragment"
+        android:label="EditDishFragment"
+        tools:layout="@layout/add_change_dish_fragment_layout">
+        <action
+            android:id="@+id/action_editDishFragment_to_dishesListFragment"
             app:destination="@id/dishesListFragment" />
     </fragment>
 </navigation>

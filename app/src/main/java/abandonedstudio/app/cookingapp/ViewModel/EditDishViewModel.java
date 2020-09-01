@@ -5,7 +5,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import abandonedstudio.app.cookingapp.Adapters.AddDishIngredientsAdapter;
 import abandonedstudio.app.cookingapp.Adapters.AddPreparationStepsAdapter;
@@ -19,11 +23,10 @@ import abandonedstudio.app.cookingapp.Repository.IngredientRepository;
 import abandonedstudio.app.cookingapp.Repository.PreparationStepRepository;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class AddDishViewModel extends AndroidViewModel {
+public class EditDishViewModel extends AndroidViewModel {
 
     private DishRepository dishRepository;
     private PreparationStepRepository preparationStepRepository;
@@ -35,8 +38,12 @@ public class AddDishViewModel extends AndroidViewModel {
     private CompositeDisposable disposable = new CompositeDisposable();
     public MutableLiveData<Boolean> isInserted = new MutableLiveData<>();
     public Long dishId;
+    public ArrayList<String> ingredientsDescription = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
+    public ArrayList<String> preparationStepsDescription = new ArrayList<>();
+    private List<PreparationStep> preparationSteps = new ArrayList<>();
 
-    public AddDishViewModel(@NonNull Application application) {
+    public EditDishViewModel(@NonNull Application application) {
         super(application);
         dishRepository = new DishRepository(application);
         ingredientRepository = new IngredientRepository(application);
@@ -44,8 +51,8 @@ public class AddDishViewModel extends AndroidViewModel {
         addDishCreator = new AddDishCreator();
     }
 
-    public void insert(Dish dish){
-        dishRepository.insert(dish);
+    public void update(Dish dish){
+        dishRepository.update(dish);
     }
 
     public void insert(PreparationStep preparationStep){
@@ -56,24 +63,50 @@ public class AddDishViewModel extends AndroidViewModel {
         ingredientRepository.insert(ingredient);
     }
 
-    public void insertAndWait(Dish dish){
-        disposable.add(
-                dishRepository.insertAndWait(dish)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeWith(new DisposableSingleObserver<Long>() {
-            @Override
-            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Long aLong) {
-                isInserted.postValue(true);
-                Log.d("dishId", String.valueOf(aLong));
-                dishId = aLong;
-            }
+    public void delete(Ingredient ingredient){
+        ingredientRepository.delete(ingredient);
+    }
 
-            @Override
-            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                isInserted.postValue(false);
-            }
-        }));
+    public void delete(PreparationStep preparationStep){
+        preparationStepRepository.delete(preparationStep);
+    }
+
+    public ArrayList<String> getIngredientsDescription() {
+        return ingredientsDescription;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setUpListOfIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+        for(int i=0; i<ingredients.size(); i++){
+            ingredientsDescription.add(i, ingredients.get(i).getIngredient());
+        }
+    }
+
+    public ArrayList<String> getPreparationStepsDescription() {
+        return preparationStepsDescription;
+    }
+
+    public void setUpListOfPreparationSteps(List<PreparationStep> preparationSteps) {
+        this.preparationSteps = preparationSteps;
+        for (int i=0; i<preparationSteps.size(); i++){
+            preparationStepsDescription.add(i, preparationSteps.get(i).getStepDescription());
+        }
+    }
+
+    public List<PreparationStep> getPreparationSteps() {
+        return preparationSteps;
+    }
+
+    public LiveData<List<Ingredient>> getAllIngredientsFromDish(int dishId){
+        return ingredientRepository.getAllIngredientsFromDish(dishId);
+    }
+
+    public LiveData<List<PreparationStep>> getAllPreparationStepsFromDish(int dishId){
+        return preparationStepRepository.getAllPreparationStepsFromDish(dishId);
     }
 
     @Override

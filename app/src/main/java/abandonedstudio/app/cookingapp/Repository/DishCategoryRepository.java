@@ -2,6 +2,7 @@ package abandonedstudio.app.cookingapp.Repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -51,6 +52,11 @@ public class DishCategoryRepository {
         protected Void doInBackground(DishCategory... dishCategories) {
             dishCategoryDao.insert(dishCategories[0]);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Log.d("catins", "done");
         }
     }
 
