@@ -74,6 +74,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/caudex_italic"
                 android:text="@string/dish_name"
                 android:textAlignment="center"
                 android:textColor="#DD2C00"

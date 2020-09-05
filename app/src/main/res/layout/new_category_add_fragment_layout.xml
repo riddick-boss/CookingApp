@@ -19,7 +19,7 @@
         android:fontFamily="@font/caudex_italic"
         android:hint="@string/enter_new_category"
         android:importantForAutofill="no"
-        android:inputType="textCapSentences"
+        android:inputType="textCapSentences|textMultiLine"
         android:padding="10dp"
         android:textColorHint="#3F51B5"
         android:textSize="27sp"

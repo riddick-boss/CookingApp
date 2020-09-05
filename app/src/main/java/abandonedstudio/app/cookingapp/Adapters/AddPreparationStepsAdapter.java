@@ -119,6 +119,7 @@ public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparat
             //removing step with animation
             removeStepButton.setOnClickListener(view -> {
                 removeStep(getAdapterPosition());
+                nestedLayout.setVisibility(View.INVISIBLE);
             });
         }
 

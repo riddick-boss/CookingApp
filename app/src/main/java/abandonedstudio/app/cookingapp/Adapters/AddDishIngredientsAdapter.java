@@ -89,6 +89,7 @@ public class AddDishIngredientsAdapter extends RecyclerView.Adapter<AddDishIngre
             //removing ingredient with animation
             removeIngredientButton.setOnClickListener(view -> {
                 removeIngredient(getAdapterPosition());
+                nestedLayout.setVisibility(View.INVISIBLE);
             });
         }
 

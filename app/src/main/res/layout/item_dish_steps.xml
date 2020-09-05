@@ -45,12 +45,13 @@
             android:id="@+id/nested_preparation_step_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:hint="@string/enter_step"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
             android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/nested_item_preparation_step_add_button"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton

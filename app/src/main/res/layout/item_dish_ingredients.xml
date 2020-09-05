@@ -33,13 +33,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nested_item_ingredient_layout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="#FFFFFF"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ingredient_list_dish_textView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="invisible">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
             android:id="@+id/nested_item_ingredient_add_ingredient_editText"
@@ -49,7 +49,7 @@
             android:hint="@string/enter_new_ingredient"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/nested_item_ingredient_add_ingredient_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -58,22 +58,22 @@
             android:id="@+id/nested_item_ingredient_add_ingredient_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitXY"
             android:backgroundTint="#FFFFFF"
-            app:srcCompat="@drawable/ic_baseline_check_24"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/nested_item_ingredient_remove_button"
-            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_check_24"
             tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/nested_item_ingredient_remove_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="fitXY"
             android:backgroundTint="#FFFFFF"
-            app:srcCompat="@drawable/ic_baseline_remove_24"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_baseline_remove_24"
             tools:ignore="ContentDescription" />
 
 
