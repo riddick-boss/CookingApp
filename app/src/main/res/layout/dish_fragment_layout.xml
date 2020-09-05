@@ -4,100 +4,140 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wood_table_background"
     tools:context="Fragments.DishFragment">
 
-    <ImageButton
-        android:id="@+id/back_to_dish_list_from_dish_imageButton"
-        android:layout_width="70dp"
-        android:layout_height="55dp"
-        android:backgroundTintMode="screen"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
-
-    <ImageView
-        android:id="@+id/preparation_time_imageView"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_clock_24" />
-
-    <ImageView
-        android:id="@+id/dish_photo_imageView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_time_textView" />
-
-    <TextView
-        android:id="@+id/preparation_time_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="@string/preparation_time"
-        app:layout_constraintEnd_toEndOf="@+id/preparation_time_imageView"
-        app:layout_constraintStart_toStartOf="@+id/preparation_time_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_time_imageView" />
-
-    <TextView
-        android:id="@+id/dish_name_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/dish_name"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/dish_photo_imageView"
-        app:layout_constraintEnd_toStartOf="@+id/preparation_time_imageView"
-        app:layout_constraintStart_toEndOf="@+id/back_to_dish_list_from_dish_imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/back_to_dish_list_from_dish_imageButton" />
-
-    <TextView
-        android:id="@+id/ingredients_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/ingredients"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dish_photo_imageView" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ingredients_recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/shopping_list_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients_textView" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/preparation_steps_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/preparing"
-        app:layout_constraintStart_toStartOf="@+id/ingredients_textView"
-        app:layout_constraintTop_toBottomOf="@+id/ingredients_recyclerView" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/preparation_steps_recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preparation_steps_textView" />
+            <ImageButton
+                android:id="@+id/back_to_dish_list_from_dish_imageButton"
+                android:layout_width="70dp"
+                android:layout_height="55dp"
+                android:backgroundTint="#99FFFFFF"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/preparation_time_imageView"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_twotone_access_time_24"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/dish_photo_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dish_name_textView"
+                app:srcCompat="@drawable/empty_plate_graphic"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/preparation_time_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/preparation_time"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/preparation_time_imageView"
+                app:layout_constraintStart_toStartOf="@+id/preparation_time_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/preparation_time_imageView" />
+
+            <TextView
+                android:id="@+id/dish_name_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/dish_name"
+                android:textAlignment="center"
+                android:textColor="#DD2C00"
+                android:textSize="30sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toStartOf="@+id/preparation_time_imageView"
+                app:layout_constraintStart_toEndOf="@+id/back_to_dish_list_from_dish_imageButton"
+                app:layout_constraintTop_toBottomOf="@+id/back_to_dish_list_from_dish_imageButton" />
+
+            <TextView
+                android:id="@+id/ingredients_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/ingredients"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dish_photo_imageView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ingredients_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ingredients_textView"
+                tools:listitem="@layout/item_dish_ingredients" />
+
+            <TextView
+                android:id="@+id/preparation_steps_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/preparing"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="@+id/ingredients_textView"
+                app:layout_constraintTop_toBottomOf="@+id/ingredients_recyclerView" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/preparation_steps_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/preparation_steps_textView"
+                tools:listitem="@layout/item_dish_steps" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/shopping_list_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/create_shopping_list"
+        android:background="@drawable/custom_create_shopping_list_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

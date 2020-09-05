@@ -53,11 +53,12 @@
         android:id="@+id/back_to_categories_from_dish_list_imageButton"
         android:layout_width="70dp"
         android:layout_height="55dp"
-        android:backgroundTintMode="screen"
+        android:backgroundTint="#99FFFFFF"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+        tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nested_dish_list_layout"
@@ -78,7 +79,8 @@
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
+            app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/dish_name_nested_dish_list_layout_textView"
@@ -87,6 +89,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/dish_name"
             android:textAlignment="center"
+            android:textColor="#FFAB00"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

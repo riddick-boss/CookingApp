@@ -18,7 +18,7 @@
     <string name="change_category_name">Change category name</string>
     <string name="delete_category">Delete this category</string>
     <string name="dish_name">Dish name</string>
-    <string name="preparation_time">10:00</string>
+    <string name="preparation_time">10</string>
     <string name="choose_preparation_time">"?"</string>
     <string name="choose_image">Choose photo</string>
     <string name="ready">Ready</string>
