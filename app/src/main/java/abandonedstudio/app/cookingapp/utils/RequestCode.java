@@ -1,10 +1,6 @@
-package abandonedstudio.app.cookingapp;
+package abandonedstudio.app.cookingapp.utils;
 
 public class RequestCode {
-
-    public RequestCode() {
-        //empty constructor
-    }
 
     public static final int GALLERY_PICK_IMAGE_REQUEST_CODE = 1;
 

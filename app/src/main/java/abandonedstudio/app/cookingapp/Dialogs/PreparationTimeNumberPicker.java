@@ -1,7 +1,6 @@
 package abandonedstudio.app.cookingapp.Dialogs;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.widget.NumberPicker;
 
 import androidx.appcompat.app.AlertDialog;
@@ -25,21 +24,11 @@ public class PreparationTimeNumberPicker {
         builder.setView(numberPicker);
         builder.setTitle(R.string.choose_preparation_time_dialog_title);
         builder.setMessage(R.string.choose_preparation_time_dialog_message);
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //getting int from picker
-                listener.getPreparationTime(numberPicker.getValue());
-            }
+        builder.setPositiveButton(R.string.ok, (dialog, which) -> {
+            //getting int from picker
+            listener.getPreparationTime(numberPicker.getValue());
         });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        builder.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
         builder.show();
     }
 

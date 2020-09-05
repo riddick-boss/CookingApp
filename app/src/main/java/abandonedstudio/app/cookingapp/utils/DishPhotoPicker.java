@@ -1,25 +1,9 @@
-package abandonedstudio.app.cookingapp;
+package abandonedstudio.app.cookingapp.utils;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Environment;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Objects;
 
 public class DishPhotoPicker {
 

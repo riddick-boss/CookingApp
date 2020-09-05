@@ -90,7 +90,6 @@ public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparat
         private TextView stepDescriptionTextView, stepNumberTextView;
         private EditText nestedStepEditText;
         private View nestedLayout;
-        private ImageButton changeStepButton;
 
         public AddStepHolder(@NonNull View itemView) {
             super(itemView);
@@ -98,29 +97,36 @@ public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparat
             stepNumberTextView = itemView.findViewById(R.id.step_number_dish_textView);
             nestedStepEditText = itemView.findViewById(R.id.nested_preparation_step_editText);
             nestedLayout = itemView.findViewById(R.id.nested_item_preparation_step_layout);
-            changeStepButton = itemView.findViewById(R.id.nested_item_preparation_step_add_button);
+            ImageButton changeStepButton = itemView.findViewById(R.id.nested_item_preparation_step_add_button);
+            ImageButton removeStepButton = itemView.findViewById(R.id.nested_item_preparation_step_remove_button);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    nestedLayout.setVisibility(View.VISIBLE);
-                    nestedStepEditText.setText(stepDescriptionTextView.getText());
-                }
+            itemView.setOnClickListener(v -> {
+                nestedLayout.setVisibility(View.VISIBLE);
+                nestedStepEditText.setText(stepDescriptionTextView.getText());
             });
 
-            changeStepButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String newStep = nestedStepEditText.getText().toString().trim();
+            changeStepButton.setOnClickListener(v -> {
+                String newStep = nestedStepEditText.getText().toString().trim();
 
-                    //updating step at specified index
-                    if(!newStep.isEmpty()){
-                        preparationSteps.set(getAdapterPosition(), newStep);
-                        notifyDataSetChanged();
-                    }
-                    nestedLayout.setVisibility(View.INVISIBLE);
+                //updating step at specified index
+                if(!newStep.isEmpty()){
+                    preparationSteps.set(getAdapterPosition(), newStep);
+                    notifyDataSetChanged();
                 }
+                nestedLayout.setVisibility(View.INVISIBLE);
+            });
+
+            //removing step with animation
+            removeStepButton.setOnClickListener(view -> {
+                removeStep(getAdapterPosition());
             });
         }
+
+        private void removeStep(int position) {
+            preparationSteps.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, preparationSteps.size());
+        }
+
     }
 }

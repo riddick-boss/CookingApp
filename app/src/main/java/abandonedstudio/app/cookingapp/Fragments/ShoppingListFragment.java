@@ -22,13 +22,6 @@ import abandonedstudio.app.cookingapp.ViewModel.SharedViewModel;
 
 public class ShoppingListFragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private TextView dishNameTextView;
-    private ImageButton goToChooseShoppingList;
-    private Button cookButton;
-    private SharedViewModel sharedViewModel;
-    private ShoppingListAdapter adapter;
-
 
     @Nullable
     @Override
@@ -40,14 +33,14 @@ public class ShoppingListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dishNameTextView = view.findViewById(R.id.dish_name_shopping_list_textView);
-        recyclerView = view.findViewById(R.id.shopping_list_recyclerView);
-        goToChooseShoppingList = view.findViewById(R.id.back_to_choose_shopping_list_imageButton);
-        cookButton = view.findViewById(R.id.go_to_dish_button);
+        TextView dishNameTextView = view.findViewById(R.id.dish_name_shopping_list_textView);
+        RecyclerView recyclerView = view.findViewById(R.id.shopping_list_recyclerView);
+        ImageButton goToChooseShoppingList = view.findViewById(R.id.back_to_choose_shopping_list_imageButton);
+        Button cookButton = view.findViewById(R.id.go_to_dish_button);
 
-        adapter = new ShoppingListAdapter();
+        ShoppingListAdapter adapter = new ShoppingListAdapter();
 
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         dishNameTextView.setText(sharedViewModel.getDish().getDishName());
 
@@ -57,21 +50,13 @@ public class ShoppingListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        goToChooseShoppingList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(ShoppingListFragment.this)
-                        .navigate(R.id.action_shoppingListFragment_to_createShoppingListFragment);
-            }
-        });
+        goToChooseShoppingList.setOnClickListener(v -> NavHostFragment.findNavController(ShoppingListFragment.this)
+                .navigate(R.id.action_shoppingListFragment_to_createShoppingListFragment));
 
-        cookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //stop notification service
-                NavHostFragment.findNavController(ShoppingListFragment.this)
-                        .navigate(R.id.action_shoppingListFragment_to_dishFragment);
-            }
+        cookButton.setOnClickListener(v -> {
+            //stop notification service
+            NavHostFragment.findNavController(ShoppingListFragment.this)
+                    .navigate(R.id.action_shoppingListFragment_to_dishFragment);
         });
     }
 }

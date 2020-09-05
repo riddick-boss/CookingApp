@@ -1,4 +1,4 @@
-package abandonedstudio.app.cookingapp;
+package abandonedstudio.app.cookingapp.utils;
 
 import android.app.Activity;
 import android.content.Context;

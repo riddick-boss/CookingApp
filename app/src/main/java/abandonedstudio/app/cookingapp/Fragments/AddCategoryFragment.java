@@ -1,7 +1,6 @@
 package abandonedstudio.app.cookingapp.Fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import abandonedstudio.app.cookingapp.CloseKeyboard;
 import abandonedstudio.app.cookingapp.Database.DishCategory;
 import abandonedstudio.app.cookingapp.R;
 import abandonedstudio.app.cookingapp.ViewModel.AddCategoryViewModel;
+import abandonedstudio.app.cookingapp.utils.CloseKeyboard;
 
 public class AddCategoryFragment extends Fragment implements View.OnClickListener {
 

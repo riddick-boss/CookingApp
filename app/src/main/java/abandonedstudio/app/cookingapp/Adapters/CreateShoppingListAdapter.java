@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,15 +33,12 @@ public class CreateShoppingListAdapter extends RecyclerView.Adapter<CreateShoppi
         final Ingredient currentIngredient = ingredients.get(position);
         holder.ingredientTextView.setText(currentIngredient.getIngredient());
         //create shopping list from ingredients which are checked to buy
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    ingredientsToBuy.add(currentIngredient.getIngredient());
-                }
-                else {
-                    ingredientsToBuy.remove(currentIngredient.getIngredient());
-                }
+        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked){
+                ingredientsToBuy.add(currentIngredient.getIngredient());
+            }
+            else {
+                ingredientsToBuy.remove(currentIngredient.getIngredient());
             }
         });
         if(isCheckedAll){

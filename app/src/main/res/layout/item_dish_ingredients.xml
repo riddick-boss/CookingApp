@@ -13,23 +13,27 @@
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
+        app:srcCompat="@drawable/ic_baseline_chevron_right_24"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/ingredient_list_dish_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/ingredient"
+        android:textColor="@color/colorPrimary"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@+id/dish_ingredient_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dish_ingredient_imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/nested_item_ingredient_layout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/ingredient_list_dish_textView"
@@ -41,22 +45,37 @@
             android:id="@+id/nested_item_ingredient_add_ingredient_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:hint="@string/enter_new_ingredient"
             android:importantForAutofill="no"
-            android:inputType="text"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:inputType="textMultiLine"
+            android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@+id/nested_item_ingredient_add_ingredient_button"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/nested_item_ingredient_add_ingredient_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:scaleType="fitXY"
+            android:backgroundTint="#FFFFFF"
             app:srcCompat="@drawable/ic_baseline_check_24"
+            app:layout_constraintEnd_toStartOf="@id/nested_item_ingredient_remove_button"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/nested_item_ingredient_remove_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitXY"
+            android:backgroundTint="#FFFFFF"
+            app:srcCompat="@drawable/ic_baseline_remove_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="ContentDescription" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

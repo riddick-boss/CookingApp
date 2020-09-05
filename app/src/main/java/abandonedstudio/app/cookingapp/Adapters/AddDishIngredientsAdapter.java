@@ -17,7 +17,6 @@ import abandonedstudio.app.cookingapp.R;
 public class AddDishIngredientsAdapter extends RecyclerView.Adapter<AddDishIngredientsAdapter.AddIngredientHolder> {
 
     private ArrayList<String> ingredients = new ArrayList<>();
-    private IngredientsArrayPasser listener;
 
     @NonNull
     @Override
@@ -66,39 +65,37 @@ public class AddDishIngredientsAdapter extends RecyclerView.Adapter<AddDishIngre
             ingredientTextView = itemView.findViewById(R.id.ingredient_list_dish_textView);
             nestedChangeIngredientEditText = itemView.findViewById(R.id.nested_item_ingredient_add_ingredient_editText);
             ImageButton changeIngredientButton = itemView.findViewById(R.id.nested_item_ingredient_add_ingredient_button);
+            ImageButton removeIngredientButton = itemView.findViewById(R.id.nested_item_ingredient_remove_button);
             nestedLayout = itemView.findViewById(R.id.nested_item_ingredient_layout);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    nestedLayout.setVisibility(View.VISIBLE);
-                    nestedChangeIngredientEditText.setText(ingredientTextView.getText());
-                }
+            itemView.setOnClickListener(v -> {
+                nestedLayout.setVisibility(View.VISIBLE);
+                nestedChangeIngredientEditText.setText(ingredientTextView.getText());
             });
 
-            changeIngredientButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String newIngredient = nestedChangeIngredientEditText.getText().toString().trim();
-                    //updating ingredients array
-                    //ingredients.remove(getAdapterPosition());
-                    //ingredients.add(newIngredient);
-                    //updating ingredient at specified index
-                    if(!newIngredient.isEmpty()){
-                        ingredients.set(getAdapterPosition(), newIngredient);
-                        notifyDataSetChanged();
-                    }
-                    nestedLayout.setVisibility(View.INVISIBLE);
+            changeIngredientButton.setOnClickListener(v -> {
+                String newIngredient = nestedChangeIngredientEditText.getText().toString().trim();
+                //updating ingredients array
+                //ingredients.remove(getAdapterPosition());
+                //ingredients.add(newIngredient);
+                //updating ingredient at specified index
+                if(!newIngredient.isEmpty()){
+                    ingredients.set(getAdapterPosition(), newIngredient);
+                    notifyDataSetChanged();
                 }
+                nestedLayout.setVisibility(View.INVISIBLE);
+            });
+
+            //removing ingredient with animation
+            removeIngredientButton.setOnClickListener(view -> {
+                removeIngredient(getAdapterPosition());
             });
         }
-    }
 
-    public interface IngredientsArrayPasser{
-        void PassIngredients(ArrayList<String> arrayList);
-    }
-
-    public void setIngredientsArrayPasserListener(IngredientsArrayPasser listener){
-        this.listener = listener;
+        private void removeIngredient(int position){
+            ingredients.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, ingredients.size());
+        }
     }
 }

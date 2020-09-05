@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,14 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
-
 import abandonedstudio.app.cookingapp.Adapters.DishCategoryAdapter;
-import abandonedstudio.app.cookingapp.CloseKeyboard;
 import abandonedstudio.app.cookingapp.Database.DishCategory;
 import abandonedstudio.app.cookingapp.R;
 import abandonedstudio.app.cookingapp.ViewModel.DishCategoryViewModel;
 import abandonedstudio.app.cookingapp.ViewModel.SharedViewModel;
+import abandonedstudio.app.cookingapp.utils.CloseKeyboard;
 
 public class DishCategoryFragment extends Fragment {
 
@@ -71,20 +68,10 @@ public class DishCategoryFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        dishCategoryViewModel.getAllCategories().observe(getViewLifecycleOwner(), new Observer<List<DishCategory>>() {
-            @Override
-            public void onChanged(@Nullable List<DishCategory> notes) {
-                adapter.setDishCategories(notes);
-            }
-        });
+        dishCategoryViewModel.getAllCategories().observe(getViewLifecycleOwner(), adapter::setDishCategories);
 
-        addNewCategoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(DishCategoryFragment.this)
-                       .navigate(R.id.action_dishCategoryFragment_to_addCategoryFragment);
-            }
-        });
+        addNewCategoryButton.setOnClickListener(v -> NavHostFragment.findNavController(DishCategoryFragment.this)
+               .navigate(R.id.action_dishCategoryFragment_to_addCategoryFragment));
 
         adapter.setOnItemClickListener(new DishCategoryAdapter.OnItemClickListener() {
             @Override
@@ -93,39 +80,33 @@ public class DishCategoryFragment extends Fragment {
                 categoryNameEditText.setText(aDishCategory.getCategory());
                 final int currentId = aDishCategory.getCategoryId();
 
-                changeCategoryNameButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String updatedDishCategoryName = categoryNameEditText.getText().toString().trim();
-                        if(!updatedDishCategoryName.isEmpty() && !updatedDishCategoryName.equals(aDishCategory.getCategory())){
-                            DishCategory currentDishCategory = new DishCategory(updatedDishCategoryName);
-                            currentDishCategory.setCategoryId(currentId);
-                            dishCategoryViewModel.update(currentDishCategory);
-                            closeKeyboard.closeKeyboard(requireActivity());
-                            categoryNameEditText.setText(null);
-                            categoryNameEditText.clearFocus();
-                            nestedLayout.setVisibility(View.INVISIBLE);
-                            Toast.makeText(getContext(), "Category name updated", Toast.LENGTH_SHORT).show();
-                        }
-                        else if(updatedDishCategoryName.equals(aDishCategory.getCategory())){
-                            Toast.makeText(getContext(), "Change category name before!", Toast.LENGTH_SHORT).show();
-                        }
-
+                changeCategoryNameButton.setOnClickListener(v -> {
+                    String updatedDishCategoryName = categoryNameEditText.getText().toString().trim();
+                    if(!updatedDishCategoryName.isEmpty() && !updatedDishCategoryName.equals(aDishCategory.getCategory())){
+                        DishCategory currentDishCategory = new DishCategory(updatedDishCategoryName);
+                        currentDishCategory.setCategoryId(currentId);
+                        dishCategoryViewModel.update(currentDishCategory);
+                        closeKeyboard.closeKeyboard(requireActivity());
+                        categoryNameEditText.setText(null);
+                        categoryNameEditText.clearFocus();
+                        nestedLayout.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getContext(), "Category name updated", Toast.LENGTH_SHORT).show();
                     }
+                    else if(updatedDishCategoryName.equals(aDishCategory.getCategory())){
+                        Toast.makeText(getContext(), "Change category name before!", Toast.LENGTH_SHORT).show();
+                    }
+
                 });
 
-                deleteCategoryButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dishCategoryViewModel.delete(aDishCategory);
-                        Snackbar.make(v, "Category deleted", Snackbar.LENGTH_SHORT).show();
-                        nestedLayout.setVisibility(View.INVISIBLE);
+                deleteCategoryButton.setOnClickListener(v -> {
+                    dishCategoryViewModel.delete(aDishCategory);
+                    Snackbar.make(v, "Category deleted", Snackbar.LENGTH_SHORT).show();
+                    nestedLayout.setVisibility(View.INVISIBLE);
 
-                        /* Bundle result = new Bundle();
-                        result.putString("bundleKey", "result");
-                        getParentFragmentManager().setFragmentResult("requestKey", result); */
+                    /* Bundle result = new Bundle();
+                    result.putString("bundleKey", "result");
+                    getParentFragmentManager().setFragmentResult("requestKey", result); */
 
-                    }
                 });
             }
 
@@ -138,11 +119,6 @@ public class DishCategoryFragment extends Fragment {
             }
         });
 
-        closeNestedLayoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nestedLayout.setVisibility(View.INVISIBLE);
-            }
-        });
+        closeNestedLayoutButton.setOnClickListener(v -> nestedLayout.setVisibility(View.INVISIBLE));
     }
 }

@@ -13,19 +13,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 import abandonedstudio.app.cookingapp.Adapters.DishIngredientAdapter;
 import abandonedstudio.app.cookingapp.Adapters.DishPreparationStepsAdapter;
 import abandonedstudio.app.cookingapp.Database.Dish;
-import abandonedstudio.app.cookingapp.Database.Ingredient;
-import abandonedstudio.app.cookingapp.Database.PreparationStep;
 import abandonedstudio.app.cookingapp.GlideModule.GlideApp;
 import abandonedstudio.app.cookingapp.R;
 import abandonedstudio.app.cookingapp.ViewModel.DishViewModel;
@@ -33,16 +28,8 @@ import abandonedstudio.app.cookingapp.ViewModel.SharedViewModel;
 
 public class DishFragment extends Fragment {
 
-    private TextView dishNameTextView, preparationTimeTextView;
-    private SharedViewModel sharedViewModel;
-    private DishViewModel dishViewModel;
-    private RecyclerView ingredientsRecyclerView, stepsRecyclerView;
-    private ImageButton backToDishListButton;
-    private Button goToShoppingListButton;
     private DishIngredientAdapter ingredientAdapter;
     private DishPreparationStepsAdapter stepsAdapter;
-    private int dishId;
-    private ImageView dishPhotoImageView;
 
 
     @Nullable
@@ -55,22 +42,22 @@ public class DishFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dishNameTextView = view.findViewById(R.id.dish_name_textView);
-        preparationTimeTextView = view.findViewById(R.id.preparation_time_textView);
-        backToDishListButton = view.findViewById(R.id.back_to_dish_list_from_dish_imageButton);
-        ingredientsRecyclerView = view.findViewById(R.id.ingredients_recyclerView);
-        stepsRecyclerView = view.findViewById(R.id.preparation_steps_recyclerView);
-        goToShoppingListButton = view.findViewById(R.id.shopping_list_button);
-        dishPhotoImageView = view.findViewById(R.id.dish_photo_imageView);
+        TextView dishNameTextView = view.findViewById(R.id.dish_name_textView);
+        TextView preparationTimeTextView = view.findViewById(R.id.preparation_time_textView);
+        ImageButton backToDishListButton = view.findViewById(R.id.back_to_dish_list_from_dish_imageButton);
+        RecyclerView ingredientsRecyclerView = view.findViewById(R.id.ingredients_recyclerView);
+        RecyclerView stepsRecyclerView = view.findViewById(R.id.preparation_steps_recyclerView);
+        Button goToShoppingListButton = view.findViewById(R.id.shopping_list_button);
+        ImageView dishPhotoImageView = view.findViewById(R.id.dish_photo_imageView);
 
         ingredientAdapter = new DishIngredientAdapter();
         stepsAdapter = new DishPreparationStepsAdapter();
 
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        dishViewModel = new ViewModelProvider(requireActivity()).get(DishViewModel.class);
+        SharedViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        DishViewModel dishViewModel = new ViewModelProvider(requireActivity()).get(DishViewModel.class);
 
         Dish dish = sharedViewModel.getDish();
-        dishId = dish.getDishId();
+        int dishId = dish.getDishId();
 
 
         dishNameTextView.setText(dish.getDishName());
@@ -85,38 +72,18 @@ public class DishFragment extends Fragment {
         ingredientsRecyclerView.setHasFixedSize(false);
         ingredientsRecyclerView.setAdapter(ingredientAdapter);
 
-        dishViewModel.getAllIngredientsFromDish(dishId).observe(getViewLifecycleOwner(), new Observer<List<Ingredient>>() {
-            @Override
-            public void onChanged(List<Ingredient> ingredients) {
-                ingredientAdapter.setIngredients(ingredients);
-            }
-        });
+        dishViewModel.getAllIngredientsFromDish(dishId).observe(getViewLifecycleOwner(), ingredients -> ingredientAdapter.setIngredients(ingredients));
 
         stepsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         stepsRecyclerView.setHasFixedSize(false);
         stepsRecyclerView.setAdapter(stepsAdapter);
 
-        dishViewModel.getAllPreparationStepsFromDish(dishId).observe(getViewLifecycleOwner(), new Observer<List<PreparationStep>>() {
-            @Override
-            public void onChanged(List<PreparationStep> preparationSteps) {
-                stepsAdapter.setPreparationSteps(preparationSteps);
-            }
-        });
+        dishViewModel.getAllPreparationStepsFromDish(dishId).observe(getViewLifecycleOwner(), preparationSteps -> stepsAdapter.setPreparationSteps(preparationSteps));
 
-        backToDishListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(DishFragment.this)
-                        .navigate(R.id.action_dishFragment_to_dishesListFragment);
-            }
-        });
+        backToDishListButton.setOnClickListener(v -> NavHostFragment.findNavController(DishFragment.this)
+                .navigate(R.id.action_dishFragment_to_dishesListFragment));
 
-        goToShoppingListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(DishFragment.this)
-                        .navigate(R.id.action_dishFragment_to_createShoppingListFragment);
-            }
-        });
+        goToShoppingListButton.setOnClickListener(v -> NavHostFragment.findNavController(DishFragment.this)
+                .navigate(R.id.action_dishFragment_to_createShoppingListFragment));
     }
 }

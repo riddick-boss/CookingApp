@@ -50,24 +50,18 @@ public class DishCategoryAdapter extends RecyclerView.Adapter<DishCategoryAdapte
                 super(itemView);
                 dishCategoryTextView = itemView.findViewById(R.id.dish_category_textView);
 
-                itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        int position = getAdapterPosition();
-                        if (listener != null && position != RecyclerView.NO_POSITION) {
-                            listener.onItemLongClick(dishCategories.get(position));
-                        }
-                        return true;
+                itemView.setOnLongClickListener(v -> {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemLongClick(dishCategories.get(position));
                     }
+                    return true;
                 });
 
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int position = getAdapterPosition();
-                        if (listener != null && position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(dishCategories.get(position));
-                        }
+                itemView.setOnClickListener(v -> {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(dishCategories.get(position));
                     }
                 });
 

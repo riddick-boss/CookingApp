@@ -1,7 +1,6 @@
 package abandonedstudio.app.cookingapp.ViewModel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import abandonedstudio.app.cookingapp.Adapters.AddDishIngredientsAdapter;
 import abandonedstudio.app.cookingapp.Adapters.AddPreparationStepsAdapter;
-import abandonedstudio.app.cookingapp.AddDishCreator;
 import abandonedstudio.app.cookingapp.Database.Dish;
 import abandonedstudio.app.cookingapp.Database.Ingredient;
 import abandonedstudio.app.cookingapp.Database.PreparationStep;
@@ -21,10 +19,8 @@ import abandonedstudio.app.cookingapp.Dialogs.PreparationTimeNumberPicker;
 import abandonedstudio.app.cookingapp.Repository.DishRepository;
 import abandonedstudio.app.cookingapp.Repository.IngredientRepository;
 import abandonedstudio.app.cookingapp.Repository.PreparationStepRepository;
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import abandonedstudio.app.cookingapp.utils.AddDishCreator;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class EditDishViewModel extends AndroidViewModel {
 
@@ -33,10 +29,7 @@ public class EditDishViewModel extends AndroidViewModel {
     private IngredientRepository ingredientRepository;
     public AddDishCreator addDishCreator;
     public PreparationTimeNumberPicker picker = new PreparationTimeNumberPicker();
-    public AddDishIngredientsAdapter ingredientsAdapter = new AddDishIngredientsAdapter();
-    public AddPreparationStepsAdapter preparationStepsAdapter = new AddPreparationStepsAdapter();
     private CompositeDisposable disposable = new CompositeDisposable();
-    public MutableLiveData<Boolean> isInserted = new MutableLiveData<>();
     public Long dishId;
     public ArrayList<String> ingredientsDescription = new ArrayList<>();
     private List<Ingredient> ingredients = new ArrayList<>();

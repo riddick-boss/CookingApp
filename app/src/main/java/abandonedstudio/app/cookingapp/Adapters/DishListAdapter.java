@@ -63,25 +63,19 @@ public class DishListAdapter extends RecyclerView.Adapter<DishListAdapter.DishLi
             preparationTimeTextView = itemView.findViewById(R.id.preparation_time_list_textView);
             dishPhotoImageView = itemView.findViewById(R.id.item_dish_photo_imageView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    if(listener != null && position != RecyclerView.NO_POSITION){
-                        listener.onDishClicked(dishes.get(position));
-                    }
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if(listener != null && position != RecyclerView.NO_POSITION){
+                    listener.onDishClicked(dishes.get(position));
                 }
             });
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    int position = getAdapterPosition();
-                    if(listener != null && position != RecyclerView.NO_POSITION){
-                        listener.onDishLongCLicked(dishes.get(position));
-                    }
-                    return true;
+            itemView.setOnLongClickListener(v -> {
+                int position = getAdapterPosition();
+                if(listener != null && position != RecyclerView.NO_POSITION){
+                    listener.onDishLongCLicked(dishes.get(position));
                 }
+                return true;
             });
         }
     }

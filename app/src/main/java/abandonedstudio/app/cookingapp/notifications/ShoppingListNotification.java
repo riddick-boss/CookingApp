@@ -9,7 +9,7 @@ import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
 import abandonedstudio.app.cookingapp.R;
-import abandonedstudio.app.cookingapp.RequestCode;
+import abandonedstudio.app.cookingapp.utils.RequestCode;
 
 public class ShoppingListNotification {
 

@@ -35,20 +35,16 @@ import abandonedstudio.app.cookingapp.Adapters.PreparationStepMoveCallback;
 import abandonedstudio.app.cookingapp.Database.Dish;
 import abandonedstudio.app.cookingapp.Database.Ingredient;
 import abandonedstudio.app.cookingapp.Database.PreparationStep;
-import abandonedstudio.app.cookingapp.Dialogs.PreparationTimeNumberPicker;
 import abandonedstudio.app.cookingapp.GlideModule.GlideApp;
 import abandonedstudio.app.cookingapp.R;
-import abandonedstudio.app.cookingapp.RequestCode;
 import abandonedstudio.app.cookingapp.ViewModel.AddDishViewModel;
 import abandonedstudio.app.cookingapp.ViewModel.SharedViewModel;
+import abandonedstudio.app.cookingapp.utils.RequestCode;
 
 public class AddDishFragment extends Fragment {
 
     private EditText dishNameEditText, addIngredientEditText, addPreparationStepEditText;
-    private ImageButton backToDishListButton;
-    private ImageView clockImageView, dishPhotoImageView;
-    private Button choosePhotoButton, addDishButton, addIngredientButton, addPreparationStepButton, deletePhotoButton;
-    private RecyclerView ingredientsRecyclerView, preparationStepsRecyclerView;
+    private ImageView dishPhotoImageView;
     private TextView preparationTimeTextView;
     private AddDishViewModel addDishViewModel;
     private SharedViewModel sharedViewModel;
@@ -66,42 +62,34 @@ public class AddDishFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         dishNameEditText = view.findViewById(R.id.enter_dish_name_editText);
-        backToDishListButton = view.findViewById(R.id.back_to_dish_list_from_change_dish_imageButton);
-        clockImageView = view.findViewById(R.id.preparation_time_picker_imageView);
+        ImageButton backToDishListButton = view.findViewById(R.id.back_to_dish_list_from_change_dish_imageButton);
+        ImageView clockImageView = view.findViewById(R.id.preparation_time_picker_imageView);
         dishPhotoImageView = view.findViewById(R.id.dish_photo_imageView);
-        choosePhotoButton = view.findViewById(R.id.choose_photo_button);
-        addDishButton = view.findViewById(R.id.ready_dish_button);
-        ingredientsRecyclerView = view.findViewById(R.id.ingredients_add_recyclerView);
-        preparationStepsRecyclerView = view.findViewById(R.id.preparation_steps_add_recyclerView);
+        Button choosePhotoButton = view.findViewById(R.id.choose_photo_button);
+        Button addDishButton = view.findViewById(R.id.ready_dish_button);
+        RecyclerView ingredientsRecyclerView = view.findViewById(R.id.ingredients_add_recyclerView);
+        RecyclerView preparationStepsRecyclerView = view.findViewById(R.id.preparation_steps_add_recyclerView);
         preparationTimeTextView = view.findViewById(R.id.preparation_time_add_textView);
-        addIngredientButton = view.findViewById(R.id.add_ingredient_button);
-        addPreparationStepButton = view.findViewById(R.id.add_preparation_step_button);
+        Button addIngredientButton = view.findViewById(R.id.add_ingredient_button);
+        Button addPreparationStepButton = view.findViewById(R.id.add_preparation_step_button);
         addIngredientEditText = view.findViewById(R.id.add_ingredient_editText);
         addPreparationStepEditText = view.findViewById(R.id.add_preparation_step_editText);
-        deletePhotoButton = view.findViewById(R.id.delete_photo_button);
+        Button deletePhotoButton = view.findViewById(R.id.delete_photo_button);
 
         addDishViewModel = new ViewModelProvider(requireActivity()).get(AddDishViewModel.class);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-        ingredientsAdapter = addDishViewModel.ingredientsAdapter;
-        preparationStepsAdapter = addDishViewModel.preparationStepsAdapter;
+        ingredientsAdapter = new AddDishIngredientsAdapter();
+        preparationStepsAdapter = new AddPreparationStepsAdapter();
 
         //navigate back to dish list
-        backToDishListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(AddDishFragment.this)
-                        .navigate(R.id.action_addDishFragment_to_dishesListFragment);
-            }
-        });
+        backToDishListButton.setOnClickListener(v -> NavHostFragment.findNavController(AddDishFragment.this)
+                .navigate(R.id.action_addDishFragment_to_dishesListFragment));
 
         //open photo picker
-        choosePhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkPermissions()) {
-                    addDishViewModel.addDishCreator.pickDishPhoto(AddDishFragment.this);
-                }
+        choosePhotoButton.setOnClickListener(v -> {
+            if (checkPermissions()) {
+                addDishViewModel.addDishCreator.pickDishPhoto(AddDishFragment.this);
             }
         });
 
@@ -118,18 +106,12 @@ public class AddDishFragment extends Fragment {
         }
 
         //open number picker on clock image click
-        clockImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addDishViewModel.picker.numberPicker(requireContext());
-                addDishViewModel.picker.setListener(new PreparationTimeNumberPicker.OnPreparationTimeChoseListener() {
-                    @Override
-                    public void getPreparationTime(int time) {
-                        addDishViewModel.addDishCreator.setPreparationTime(time);
-                        preparationTimeTextView.setText(String.valueOf(addDishViewModel.addDishCreator.getPreparationTime()));
-                    }
-                });
-            }
+        clockImageView.setOnClickListener(v -> {
+            addDishViewModel.picker.numberPicker(requireContext());
+            addDishViewModel.picker.setListener(time -> {
+                addDishViewModel.addDishCreator.setPreparationTime(time);
+                preparationTimeTextView.setText(String.valueOf(addDishViewModel.addDishCreator.getPreparationTime()));
+            });
         });
 
         //set preparation time if entered
@@ -151,117 +133,71 @@ public class AddDishFragment extends Fragment {
         preparationStepsRecyclerView.setAdapter(preparationStepsAdapter);
 
         //adding new ingredient
-        addIngredientButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newIngredient = addIngredientEditText.getText().toString().trim();
-                if(newIngredient.isEmpty()){
-                    Toast.makeText(getContext(), "No ingredient entered!", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    ingredientsAdapter.addIngredient(newIngredient);
-                    addIngredientEditText.setText(null);
-                }
+        addIngredientButton.setOnClickListener(v -> {
+            String newIngredient = addIngredientEditText.getText().toString().trim();
+            if(newIngredient.isEmpty()){
+                Toast.makeText(getContext(), "No ingredient entered!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                ingredientsAdapter.addIngredient(newIngredient);
+                addIngredientEditText.setText(null);
             }
         });
 
         //adding new preparation step
-        addPreparationStepButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newPreparationStep = addPreparationStepEditText.getText().toString().trim();
-                if(newPreparationStep.isEmpty()){
-                    Toast.makeText(getContext(), "No preparation step entered", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    preparationStepsAdapter.addPreparationStep(newPreparationStep);
-                    addPreparationStepEditText.setText(null);
-                }
+        addPreparationStepButton.setOnClickListener(v -> {
+            String newPreparationStep = addPreparationStepEditText.getText().toString().trim();
+            if(newPreparationStep.isEmpty()){
+                Toast.makeText(getContext(), "No preparation step entered", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                preparationStepsAdapter.addPreparationStep(newPreparationStep);
+                addPreparationStepEditText.setText(null);
             }
         });
 
         //deleting photo and setting uri to default image uri
-        deletePhotoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addDishViewModel.addDishCreator.setDefaultUri();
-                GlideApp.with(requireContext())
-                        .load(addDishViewModel.addDishCreator.getUri())
-                        .override(dishPhotoImageView.getWidth(), dishPhotoImageView.getHeight())
-                        .fitCenter()
-                        .into(dishPhotoImageView);
-            }
+        deletePhotoButton.setOnClickListener(v -> {
+            addDishViewModel.addDishCreator.setDefaultUri();
+            GlideApp.with(requireContext())
+                    .load(addDishViewModel.addDishCreator.getUri())
+                    .override(dishPhotoImageView.getWidth(), dishPhotoImageView.getHeight())
+                    .fitCenter()
+                    .into(dishPhotoImageView);
         });
 
         //adding new dish with preparation steps and ingredients, choosing photo is optional
-        addDishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //checking if all required data is entered (dish name, steps, ingredients, etc)
-                addDishViewModel.addDishCreator.setDishName(dishNameEditText.getText().toString().trim());
-                if(addDishViewModel.addDishCreator.checkNecessaryDataEntered(ingredientsAdapter.getIngredients(), preparationStepsAdapter.getPreparationSteps(), getContext())){
-                    Dish dish = new Dish(addDishViewModel.addDishCreator.getDishName(),
-                            addDishViewModel.addDishCreator.getPreparationTime(), sharedViewModel.getDishCategory().getCategoryId(), String.valueOf(addDishViewModel.addDishCreator.getUri()));
-                    //this will be triggered when insertAndWait() is finished
+        addDishButton.setOnClickListener(v -> {
+            //checking if all required data is entered (dish name, steps, ingredients, etc)
+            addDishViewModel.addDishCreator.setDishName(dishNameEditText.getText().toString().trim());
+            if(addDishViewModel.addDishCreator.checkNecessaryDataEntered(ingredientsAdapter.getIngredients(), preparationStepsAdapter.getPreparationSteps(), getContext())){
+                Dish dish = new Dish(addDishViewModel.addDishCreator.getDishName(),
+                        addDishViewModel.addDishCreator.getPreparationTime(), sharedViewModel.getDishCategory().getCategoryId(), String.valueOf(addDishViewModel.addDishCreator.getUri()));
+                //this will be triggered when insertAndWait() is finished
 
-                    addDishViewModel.isInserted.observe(getViewLifecycleOwner(), aBoolean -> {
-                        if(addDishViewModel.isInserted.getValue()) {
-                            int dishId = addDishViewModel.dishId.intValue();
-                            for (int i = 0; i < ingredientsAdapter.getIngredients().size(); i++) {
-                                Ingredient ingredient = new Ingredient(ingredientsAdapter.getIngredients().get(i), dishId);
-                                Log.d("dishId", ingredientsAdapter.getIngredients().get(i) + " " + dishId);
-                                addDishViewModel.insert(ingredient);
-                            }
-                            for (int i = 0; i < preparationStepsAdapter.getPreparationSteps().size(); i++) {
-                                PreparationStep preparationStep = new PreparationStep(i + 1, preparationStepsAdapter.getPreparationSteps().get(i), dishId);
-                                Log.d("dishId", preparationStepsAdapter.getPreparationSteps().get(i) + " " + dishId);
-                                addDishViewModel.insert(preparationStep);
-                            }
-                            addDishViewModel.addDishCreator.setDefaultValues();
-                            dishNameEditText.setText(null);
-                            ingredientsAdapter.getIngredients().clear();
-                            preparationStepsAdapter.getPreparationSteps().clear();
-                            addDishViewModel.dishId = null;
-                            Snackbar.make(requireView(), "Dish entered", Snackbar.LENGTH_SHORT).show();
-                            addDishViewModel.isInserted.setValue(false);
-                            NavHostFragment.findNavController(AddDishFragment.this)
-                                    .navigate(R.id.action_addDishFragment_to_dishesListFragment);
+                addDishViewModel.isInserted.observe(getViewLifecycleOwner(), aBoolean -> {
+                    if(addDishViewModel.isInserted.getValue() != null && addDishViewModel.isInserted.getValue()) {
+                        int dishId = addDishViewModel.dishId.intValue();
+                        for (int i = 0; i < ingredientsAdapter.getIngredients().size(); i++) {
+                            Ingredient ingredient = new Ingredient(ingredientsAdapter.getIngredients().get(i), dishId);
+                            addDishViewModel.insert(ingredient);
                         }
-                    });
-                    addDishViewModel.insertAndWait(dish);
-
-                    /* boolean b = false;
-                    int dishId = dish.getDishId();
-                     while (!b || dish.getDishId()==0){
-                        try {
-                            int dishId = dish.getDishId();
-                            Log.d("dishId", String.valueOf(dishId));
-                            b = true;
-                        } catch (Exception ignored){
+                        for (int i = 0; i < preparationStepsAdapter.getPreparationSteps().size(); i++) {
+                            PreparationStep preparationStep = new PreparationStep(i + 1, preparationStepsAdapter.getPreparationSteps().get(i), dishId);
+                            addDishViewModel.insert(preparationStep);
                         }
+                        addDishViewModel.addDishCreator.setDefaultValues();
+                        dishNameEditText.setText(null);
+                        ingredientsAdapter.getIngredients().clear();
+                        preparationStepsAdapter.getPreparationSteps().clear();
+                        addDishViewModel.dishId = null;
+                        Snackbar.make(requireView(), "Dish entered", Snackbar.LENGTH_SHORT).show();
+                        addDishViewModel.isInserted.setValue(false);
+                        NavHostFragment.findNavController(AddDishFragment.this)
+                                .navigate(R.id.action_addDishFragment_to_dishesListFragment);
                     }
-                    b = false;
-                    while(!b){
-                        if(dish.getDishId()<=0){
-                            b=false;
-                        }
-                        else{
-                            b=true;
-                            dishId = dish.getDishId();
-                        }
-                        Log.d("dishId", String.valueOf(dishId));
-                    } */
-
-
-                    /* addDishViewModel.addDishCreator.setDefaultValues();
-                    addDishViewModel.ingredientsAdapter.getIngredients().clear();
-                    addDishViewModel.ingredientsAdapter.setIngredients(null);
-                    addDishViewModel.preparationStepsAdapter.getPreparationSteps().clear();
-                    addDishViewModel.preparationStepsAdapter.setPreparationSteps(null); */
-
-                    //NavHostFragment.findNavController(AddDishFragment.this)
-                    //        .navigate(R.id.action_addDishFragment_to_dishesListFragment);
-                }
+                });
+                addDishViewModel.insertAndWait(dish);
             }
         });
     }

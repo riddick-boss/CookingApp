@@ -1,17 +1,12 @@
-package abandonedstudio.app.cookingapp;
+package abandonedstudio.app.cookingapp.utils;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
-
-import abandonedstudio.app.cookingapp.Database.Dish;
-import abandonedstudio.app.cookingapp.ViewModel.AddDishViewModel;
 
 public class AddDishCreator {
 
@@ -78,27 +73,10 @@ public class AddDishCreator {
         this.preparationTime = preparationTime;
     }
 
-    public ArrayList<String> getIngredients() {
-        return ingredients;
-    }
-
     public void setDefaultValues(){
         setDefaultUri();
         setDishName(null);
         setPreparationTime(0);
     }
 
-    //better to use interface
-    public void setIngredients(ArrayList<String> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public ArrayList<String> getPreparationSteps() {
-        return preparationSteps;
-    }
-
-    //better to use interface
-    public void setPreparationSteps(ArrayList<String> preparationSteps) {
-        this.preparationSteps = preparationSteps;
-    }
 }
