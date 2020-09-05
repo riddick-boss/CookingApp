@@ -65,7 +65,6 @@ public class AddDishViewModel extends AndroidViewModel {
             @Override
             public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Long aLong) {
                 isInserted.postValue(true);
-                Log.d("dishId", String.valueOf(aLong));
                 dishId = aLong;
             }
 

@@ -81,7 +81,7 @@ public class AddPreparationStepsAdapter extends RecyclerView.Adapter<AddPreparat
 
     @Override
     public void onRowClear(AddStepHolder myViewHolder) {
-        myViewHolder.itemView.setBackgroundColor(Color.WHITE);
+        myViewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
         notifyDataSetChanged();
     }
 

@@ -13,14 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".Services.ShoppingListNotificationService"
-            android:description="@string/shopping_list_notification_service_description" />
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

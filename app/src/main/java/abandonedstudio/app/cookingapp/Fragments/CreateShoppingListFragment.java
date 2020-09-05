@@ -1,6 +1,9 @@
 package abandonedstudio.app.cookingapp.Fragments;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,6 +31,7 @@ import abandonedstudio.app.cookingapp.Database.Ingredient;
 import abandonedstudio.app.cookingapp.R;
 import abandonedstudio.app.cookingapp.ViewModel.CreateShoppingListViewModel;
 import abandonedstudio.app.cookingapp.ViewModel.SharedViewModel;
+import abandonedstudio.app.cookingapp.notifications.ShoppingListNotification;
 
 public class CreateShoppingListFragment extends Fragment {
 
@@ -72,6 +77,17 @@ public class CreateShoppingListFragment extends Fragment {
             if(!adapter.getIngredientsToBuy().isEmpty()){
                 sharedViewModel.setIngredientsToBuy(adapter.getIngredientsToBuy());
                 //start notification service
+                ShoppingListNotification notification = new ShoppingListNotification();
+                int notificationId= (int) System.currentTimeMillis();
+                StringBuilder content = new StringBuilder();
+                for (int i=0; i<adapter.getIngredientsToBuy().size(); i++){
+                    content.append(adapter.getIngredientsToBuy().get(i));
+                    if (i<adapter.getIngredientsToBuy().size()-1){
+                        content.append(",").append(System.lineSeparator());
+                    }
+                }
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(requireContext());
+                notificationManagerCompat.notify(notificationId, notification.buildNotification(requireContext(), sharedViewModel.getDish().getDishName(), content.toString()));
                 NavHostFragment.findNavController(CreateShoppingListFragment.this)
                         .navigate(R.id.action_createShoppingListFragment_to_shoppingListFragment);
             }
