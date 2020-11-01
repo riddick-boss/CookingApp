@@ -23,7 +23,7 @@ Used:
 - MutableLiveData
 - Animations
 
-## Basics
+## General info
 
 App is organized in MVVM architecture. Navigating between fragments is realized with AndroidX Navigation Component.
 
@@ -77,6 +77,26 @@ There is 1 database with 4 entities: DishCategory, Dish, PreparationStep and Ing
 
 ## Notifications
 
-<code sample>
+```java
+public class CreateShoppingListFragment extends Fragment {
 
-Each notification has its own unique ID, so there can be multiple notification from e.g few dishes.
+@Override
+public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+      okButton.setOnClickListener(v -> {
+            if(!adapter.getIngredientsToBuy().isEmpty()){
+                sharedViewModel.setIngredientsToBuy(adapter.getIngredientsToBuy());
+                //start notification service
+                ShoppingListNotification notification = new ShoppingListNotification();
+                int notificationId= (int) System.currentTimeMillis();
+                StringBuilder content = new StringBuilder();
+                for (int i=0; i<adapter.getIngredientsToBuy().size(); i++){
+                    content.append(adapter.getIngredientsToBuy().get(i));
+                    if (i<adapter.getIngredientsToBuy().size()-1){
+                        content.append(",").append(System.lineSeparator());
+                    }
+                }
+        });
+    }
+}           
+```
+Each notification has its own unique ID (based on milis), so there can be multiple notification from e.g few dishes.
