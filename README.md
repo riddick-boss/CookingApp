@@ -34,7 +34,9 @@ App is organized in MVVM architecture. Navigating between fragments is realized 
 <img src="/screenshots/dish_categories_list.png" width="200">
 
 Fragment shown on app opening. Here is a RecyclerView with all categories which user created. If button is pushed for longer time, layout with options to delete or edit category appears as show on this screenshot:
+
 < im src="edit_category.png" width="200">
+
 If floating button with plus sign is clicked, user is navigated to Add Dish Category fragment.
 
 #### 2. Add Dish Category fragment
