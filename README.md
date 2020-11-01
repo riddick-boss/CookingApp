@@ -31,41 +31,41 @@ App is organized in MVVM architecture. Navigating between fragments is realized 
 
 #### 1. Dish categories fragment
 
-<img src="src_wkleic" width="200">
+<img src="/Screenshots/dish_categories_list.png" width="200">
 
 Fragment shown on app opening. Here is a RecyclerView with all categories which user created. If button is pushed for longer time, layout with options to delete or edit category appears as show on this screenshot:
-< im src="src_wkleic" width="200">
+< im src="edit_category.png" width="200">
 If floating button with plus sign is clicked, user is navigated to Add Dish Category fragment.
 
 #### 2. Add Dish Category fragment
 
-<img src="src_wkleic" width="200">
+<img src="/Screenshots/add_category.png" width="200">
 
 Here user can add new category.
 
 #### 3. Dishes List fragment
 
-<img src="src_wkleic" width="200">
+<img src="/Screenshots/dishes_list.png" width="200">
 
 After choosing category user is taken to this fragment, where is list of all dishes from this specified category. Photo is loaded with usage of GlideApp. Each dish is show with usage of CardView. There is photo of a dish, name and preparation time shown. Deleting dish is similar as in Dish Categories fragment. However, if user wants to add or edit existing dish, app navigates to Edit Dish fragment.
 
 #### 4. Dish fragment
 
-<img src="src_wkleic" width="200">
+<img src="/Screenshots/dish.png" width="200">
 
 There is all information about dish - preparation time, photo (loaded with GlideApp), ingredients and recipe. On the bottom of the screen there is a button which navigates to Shopping List fragment.
 
 #### 5. Shopping List fragment
 
-<img src="src_wkleic" width="200">
-<img src="src_wkleic" width="200">
+<img src="/Screenshots/shopping_list1.png" width="200">
+<img src="/Screenshots/shopping_list2.png" width="200">
 
 Firstly, user is asked to choose what he needs to buy. There is also a CheckBox with option to choose all ingredients at once. After choosing ingredients, final shopping list is shown (that is another fragment) and simultaneously notification is created, so even if app is closed, user can easily check what he needs to buy and there is no need to unlock phone. By clicking "cook" button, app goes back to Dish fragment.
 
 #### 6. Edit Dish fragment
 
-<img src="src_wkleic" width="200">
-<img src="src_wkleic" width="200">
+<img src="/Screenshots/add_dish.png" width="200">
+<img src="/Screenshots/edit_dish.png" width="200">
 
 When user wants to create new dish this fragment handles it. Here are options to: choose preparation time - after tapping on clock image, dialog opens, enter dish name, add photo (there is a photo loaded by default as shown on screenshot), ingredients and preparation steps. To access user's gallery app asks for reading external storage permission. User can also delete or change previously added photo - it will be set to default photo. To change, edit or delete ingredients or preparation steps, user needs to click on it and another layout will be loaded (only on specified step/ingredient) with options to take this actions (deleting is done with animation). Bad preparation steps order? Well, no problem as by "drag and drop" a step it is very easy to change their order. By clicking button "ready" user can add dish, but app is preventing from adding dish without any ingredients, steps or without name. For every situation customized toast is shown - "enter name", "enter at least 1 ingredient" or "enter at least 1 step". If time was not entered, it would be set to 0.
 When user is editing dish, also this fragment is shown, but bound with dish's data.
