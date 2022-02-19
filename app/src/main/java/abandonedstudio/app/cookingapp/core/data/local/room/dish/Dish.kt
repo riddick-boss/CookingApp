@@ -29,6 +29,5 @@ data class Dish(
     var photoUri: String,
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "dish_name")
     var dishId: Int? = null
 )

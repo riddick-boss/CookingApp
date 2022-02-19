@@ -15,8 +15,8 @@ interface DishDao {
     suspend fun delete(dish: Dish)
 
     @Query("SELECT * FROM dishes WHERE category_id LIKE :categoryId ORDER BY dish_name COLLATE NOCASE")
-    suspend fun getAllDishesFromCategory(categoryId: Int): HashMap<String, Dish>
+    suspend fun getAllDishesFromCategory(categoryId: Int): List<Dish>
 
     @Query("SELECT * FROM dishes ORDER BY dish_name COLLATE NOCASE")
-    suspend fun getAllDishes(): HashMap<Int, Dish>
+    suspend fun getAllDishes(): List<Dish>
 }

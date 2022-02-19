@@ -15,5 +15,5 @@ interface IngredientDao {
     suspend fun delete(ingredient: Ingredient)
 
     @Query("SELECT * FROM ingredients WHERE dish_id LIKE :dishId COLLATE NOCASE")
-    suspend fun getAllIngredientsFromDish(dishId: Int): HashMap<Int, Ingredient>
+    suspend fun getAllIngredientsFromDish(dishId: Int): List<Ingredient>
 }

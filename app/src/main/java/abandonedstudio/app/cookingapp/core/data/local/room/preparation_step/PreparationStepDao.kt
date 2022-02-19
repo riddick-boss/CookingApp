@@ -15,5 +15,5 @@ interface PreparationStepDao {
     suspend fun delete(preparationStep: PreparationStep)
 
     @Query("SELECT * FROM preparation_steps WHERE dish_id LIKE :dishId ORDER BY step_number")
-    suspend fun getAllPreparationStepsFromDish(dishId: Int): HashMap<Int, PreparationStep>
+    suspend fun getAllPreparationStepsFromDish(dishId: Int): List<PreparationStep>
 }

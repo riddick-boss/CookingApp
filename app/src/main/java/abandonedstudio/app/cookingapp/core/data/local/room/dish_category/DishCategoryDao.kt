@@ -15,5 +15,5 @@ interface DishCategoryDao {
     suspend fun delete(dishCategory: DishCategory)
 
     @Query("SELECT * FROM dish_category ORDER BY category COLLATE NOCASE")
-    suspend fun getAllCategories(): HashMap<Int, DishCategory>
+    suspend fun getAllCategories(): List<DishCategory>
 }
