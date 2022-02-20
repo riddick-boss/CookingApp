@@ -6,7 +6,9 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.ProvideTextStyle
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +29,7 @@ fun NumberPicker(
     modifier: Modifier = Modifier,
     range: IntRange? = null,
     textStyle: TextStyle = LocalTextStyle.current,
-    onStateChanged: (Int) -> Unit = {},
+    onStateChanged: (Int) -> Unit = {}
 ) {
     val coroutineScope = rememberCoroutineScope()
     val numbersColumnHeight = 36.dp
