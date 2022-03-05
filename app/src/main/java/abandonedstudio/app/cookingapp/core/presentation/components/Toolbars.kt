@@ -14,13 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
-fun TextToolbarWithSettings(@StringRes resId: Int, onSettingsClicked: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+fun TextToolbarWithSettings(
+    @StringRes resId: Int,
+    modifier: Modifier = Modifier,
+    onSettingsClicked: () -> Unit
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -28,6 +35,10 @@ fun TextToolbarWithSettings(@StringRes resId: Int, onSettingsClicked: () -> Unit
         ) {
             Text(
                 text = stringResource(resId),
+                fontSize = 42.sp,
+                color = Color.Red,
+                fontWeight = FontWeight.Bold,
+                fontStyle = FontStyle.Italic,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
                 modifier = Modifier
@@ -43,7 +54,8 @@ fun TextToolbarWithSettings(@StringRes resId: Int, onSettingsClicked: () -> Unit
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_round_settings_24),
-                    contentDescription = contentDescription()
+                    contentDescription = contentDescription(),
+                    tint = Color.Yellow
                 )
             }
         }

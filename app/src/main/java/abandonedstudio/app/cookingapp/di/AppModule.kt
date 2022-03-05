@@ -1,5 +1,6 @@
 package abandonedstudio.app.cookingapp.di
 
+import abandonedstudio.app.cookingapp.core.navigation.NavigationManager
 import abandonedstudio.app.cookingapp.core.navigation.NavigationManagerImpl
 import dagger.Module
 import dagger.Provides
@@ -13,5 +14,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideNavigationManager() = NavigationManagerImpl()
+    fun provideNavigationManager(): NavigationManager = NavigationManagerImpl()
 }

@@ -1,7 +1,7 @@
 package abandonedstudio.app.cookingapp.core.navigation.main_nav
 
 import abandonedstudio.app.cookingapp.core.navigation.NavigationCommand
-import abandonedstudio.app.cookingapp.core.navigation.NavigationManagerImpl
+import abandonedstudio.app.cookingapp.core.navigation.NavigationManager
 import abandonedstudio.app.cookingapp.features.categories.presentation.CategoriesScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -38,10 +38,10 @@ object MainNavDirections {
 }
 
 @Composable
-fun MainNavigation(navigationManagerImpl: NavigationManagerImpl) {
+fun MainNavigation(navigationManager: NavigationManager) {
     val navController = rememberNavController()
 
-    navigationManagerImpl.commands.collectAsState().value.also {
+    navigationManager.commands.collectAsState().value.also {
         if (it.isNotEmpty()) navController.navigate(it)
     }
 

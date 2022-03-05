@@ -11,11 +11,10 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="CookingApp">CookingApp</string>
     <string name="dish_category">dish_category</string>
-    <string name="add_new_category">Add new category</string>
     <string name="enter_new_category">Enter new category</string>
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
-    <string name="change_category_name">Change category name</string>
+
     <string name="delete_category">Delete this category</string>
     <string name="dish_name">Dish name</string>
     <string name="preparation_time">10</string>
@@ -45,4 +44,7 @@
     <string name="shopping_list_notification">Shopping list notification</string>
 
     <string name="categories">Categories</string>
+    <string name="delete_category_dialog_message">Are you sure you would like to delete this category?</string>
+    <string name="add_new_category">Add new category</string>
+    <string name="change_category_name">Change category name</string>
 </resources>

@@ -15,6 +15,9 @@ interface DishCategoryDao {
     @Delete
     suspend fun delete(dishCategory: DishCategory)
 
+    @Query("DELETE FROM dish_category WHERE categoryId = :id")
+    suspend fun deleteById(id: Int)
+
     @Query("SELECT * FROM dish_category ORDER BY category COLLATE NOCASE")
     fun getAllCategories(): Flow<List<DishCategory>>
 }

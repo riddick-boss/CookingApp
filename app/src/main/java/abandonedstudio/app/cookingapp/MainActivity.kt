@@ -1,5 +1,6 @@
 package abandonedstudio.app.cookingapp
 
+import abandonedstudio.app.cookingapp.core.navigation.NavigationManager
 import abandonedstudio.app.cookingapp.core.navigation.NavigationManagerImpl
 import abandonedstudio.app.cookingapp.core.navigation.main_nav.MainNavigation
 import abandonedstudio.app.cookingapp.core.presentation.theme.CookingAppTheme
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
 
     @Inject
-    lateinit var navigationManagerImpl: NavigationManagerImpl
+    lateinit var navigationManager: NavigationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
-                    MainNavigation(navigationManagerImpl)
+                    MainNavigation(navigationManager)
                 }
             }
         }
