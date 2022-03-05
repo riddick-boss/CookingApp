@@ -43,4 +43,6 @@
     <string name="enter_step">Enter step</string>
     <string name="shopping_list_notification_service_description">This provides notification with your\'s shopping list</string>
     <string name="shopping_list_notification">Shopping list notification</string>
+
+    <string name="categories">Categories</string>
 </resources>

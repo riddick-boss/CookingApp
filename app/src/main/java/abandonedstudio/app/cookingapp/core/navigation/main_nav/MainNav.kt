@@ -1,9 +1,7 @@
 package abandonedstudio.app.cookingapp.core.navigation.main_nav
 
 import abandonedstudio.app.cookingapp.core.navigation.NavigationCommand
-import abandonedstudio.app.cookingapp.core.navigation.NavigationManager
-import abandonedstudio.app.cookingapp.core.navigation.main_nav.MainNavDirections.MainNavDestinations.CATEGORIES
-import abandonedstudio.app.cookingapp.core.navigation.main_nav.MainNavDirections.MainNavDestinations.DISH_CATEGORY
+import abandonedstudio.app.cookingapp.core.navigation.NavigationManagerImpl
 import abandonedstudio.app.cookingapp.features.categories.presentation.CategoriesScreen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,16 +14,14 @@ import androidx.navigation.navArgument
 
 object MainNavDirections {
 
-    private object MainNavDestinations {
+    private const val CATEGORIES = "CATEGORIES"
+    private const val DISH_CATEGORY = "DISH_CATEGORY"
 
-        const val CATEGORIES = "CATEGORIES"
-        const val DISH_CATEGORY = "DISH_CATEGORY"
-    }
-
-    private fun <T> getNavArgument(name: String, navType: NavType<T>, isNullable: Boolean = false) = navArgument(name) {
-        type = navType
-        nullable = isNullable
-    }
+    private fun <T> getNavArgument(name: String, navType: NavType<T>, isNullable: Boolean = false) =
+        navArgument(name) {
+            type = navType
+            nullable = isNullable
+        }
 
     val categories = object : NavigationCommand {
 
@@ -34,25 +30,32 @@ object MainNavDirections {
 
     val dishCategory = object : NavigationCommand {
 
-        override val arguments: List<NamedNavArgument> = listOf(getNavArgument("categoryId", NavType.StringType))
+        override val arguments: List<NamedNavArgument> =
+            listOf(getNavArgument("categoryId", NavType.StringType))
 
         override val destination = "$DISH_CATEGORY/{categoryId}"
     }
 }
 
 @Composable
-fun MainNavigation(navigationManager: NavigationManager) {
+fun MainNavigation(navigationManagerImpl: NavigationManagerImpl) {
     val navController = rememberNavController()
 
-    navigationManager.commands.collectAsState().value.also {
+    navigationManagerImpl.commands.collectAsState().value.also {
         if (it.isNotEmpty()) navController.navigate(it)
     }
 
     NavHost(navController, startDestination = MainNavDirections.categories.destination) {
-        composable(MainNavDirections.categories.destination, MainNavDirections.categories.arguments) {
+        composable(
+            MainNavDirections.categories.destination,
+            MainNavDirections.categories.arguments
+        ) {
             CategoriesScreen()
         }
-        composable(MainNavDirections.dishCategory.destination, MainNavDirections.dishCategory.arguments) {
+        composable(
+            MainNavDirections.dishCategory.destination,
+            MainNavDirections.dishCategory.arguments
+        ) {
 //            DishCategoryScreen()
         }
     }

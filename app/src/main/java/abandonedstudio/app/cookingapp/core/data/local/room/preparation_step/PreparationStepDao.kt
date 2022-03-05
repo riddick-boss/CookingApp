@@ -1,6 +1,7 @@
 package abandonedstudio.app.cookingapp.core.data.local.room.preparation_step
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PreparationStepDao {
@@ -15,5 +16,5 @@ interface PreparationStepDao {
     suspend fun delete(preparationStep: PreparationStep)
 
     @Query("SELECT * FROM preparation_steps WHERE dish_id LIKE :dishId ORDER BY step_number")
-    suspend fun getAllPreparationStepsFromDish(dishId: Int): List<PreparationStep>
+    fun getAllPreparationStepsFromDish(dishId: Int): Flow<List<PreparationStep>>
 }

@@ -4,12 +4,12 @@ import abandonedstudio.app.cookingapp.core.data.local.room.dish_category.DishCat
 import abandonedstudio.app.cookingapp.core.navigation.NavigationManager
 import abandonedstudio.app.cookingapp.core.navigation.main_nav.MainNavDirections
 import abandonedstudio.app.cookingapp.features.categories.data.DataSource
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -17,14 +17,15 @@ import javax.inject.Inject
 class CategoriesViewModel @Inject constructor(
     private val dataSource: DataSource,
 //    private val savedStateHandle: SavedStateHandle,
-    private val navigationManager: NavigationManager
-): ViewModel() {
+    private val navigationManagerImpl: NavigationManager,
+    application: Application
+): AndroidViewModel(application) {
 
     val categoriesFlow: StateFlow<List<DishCategory>?> by lazy {
-        flow { emit(dataSource.loadCategories()) }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
+        dataSource.categories.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
     }
 
     fun onCategoryClicked(id: String) {
-        navigationManager.navigate(MainNavDirections.dishCategory.destination, id)
+        navigationManagerImpl.navigate(MainNavDirections.dishCategory.destination, id)
     }
 }

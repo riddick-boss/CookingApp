@@ -1,6 +1,7 @@
 package abandonedstudio.app.cookingapp.core.data.local.room.dish
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DishDao {
@@ -15,8 +16,8 @@ interface DishDao {
     suspend fun delete(dish: Dish)
 
     @Query("SELECT * FROM dishes WHERE category_id LIKE :categoryId ORDER BY dish_name COLLATE NOCASE")
-    suspend fun getAllDishesFromCategory(categoryId: Int): List<Dish>
+    fun getAllDishesFromCategory(categoryId: Int): Flow<List<Dish>>
 
     @Query("SELECT * FROM dishes ORDER BY dish_name COLLATE NOCASE")
-    suspend fun getAllDishes(): List<Dish>
+    fun getAllDishes(): Flow<List<Dish>>
 }
